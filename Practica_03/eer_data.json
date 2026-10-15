@@ -1,0 +1,821 @@
+{
+  "database": "db_test_7b",
+  "source": "backups/db_test_7b_1510.sql",
+  "tables": [
+    {
+      "name": "tb_carts",
+      "columns": [
+        {
+          "name": "ID",
+          "type": "int",
+          "definition": "int unsigned NOT NULL AUTO_INCREMENT",
+          "nullable": false,
+          "autoIncrement": true,
+          "default": null,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "user_ID",
+          "type": "int",
+          "definition": "int NOT NULL",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": null,
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "status",
+          "type": "bit(1)",
+          "definition": "bit(1) DEFAULT b'1'",
+          "nullable": true,
+          "autoIncrement": false,
+          "default": "b'1'",
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime",
+          "definition": "datetime NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": "CURRENT_TIMESTAMP",
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "last_update",
+          "type": "datetime",
+          "definition": "datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP",
+          "nullable": true,
+          "autoIncrement": false,
+          "default": "NULL",
+          "pk": false,
+          "fk": false
+        }
+      ],
+      "primaryKey": [
+        "ID"
+      ],
+      "indexes": [
+        {
+          "name": "uk_cart_user",
+          "unique": true,
+          "columns": [
+            "user_ID"
+          ]
+        }
+      ],
+      "foreignKeys": [
+        {
+          "name": "tb_carts_ibfk_1",
+          "columns": [
+            "user_ID"
+          ],
+          "target": "tb_users",
+          "targetColumns": [
+            "ID"
+          ],
+          "onDelete": "RESTRICT",
+          "onUpdate": "RESTRICT"
+        }
+      ],
+      "rowCount": 0,
+      "triggers": []
+    },
+    {
+      "name": "tb_logs",
+      "columns": [
+        {
+          "name": "ID",
+          "type": "int",
+          "definition": "int NOT NULL AUTO_INCREMENT",
+          "nullable": false,
+          "autoIncrement": true,
+          "default": null,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "table_name",
+          "type": "varchar(80)",
+          "definition": "varchar(80) NOT NULL",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": null,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "table_operation",
+          "type": "enum('Create','Read','Update','Delete')",
+          "definition": "enum('Create','Read','Update','Delete') DEFAULT NULL",
+          "nullable": true,
+          "autoIncrement": false,
+          "default": "NULL",
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "db_user",
+          "type": "varchar(80)",
+          "definition": "varchar(80) NOT NULL",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": null,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "operation_date",
+          "type": "datetime",
+          "definition": "datetime NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": "CURRENT_TIMESTAMP",
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "table_description",
+          "type": "text",
+          "definition": "text NOT NULL",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": null,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "operation_status",
+          "type": "bit(1)",
+          "definition": "bit(1) DEFAULT b'1'",
+          "nullable": true,
+          "autoIncrement": false,
+          "default": "b'1'",
+          "pk": false,
+          "fk": false
+        }
+      ],
+      "primaryKey": [
+        "ID"
+      ],
+      "indexes": [],
+      "foreignKeys": [],
+      "rowCount": 5027,
+      "triggers": []
+    },
+    {
+      "name": "tb_products",
+      "columns": [
+        {
+          "name": "ID",
+          "type": "int",
+          "definition": "int unsigned NOT NULL AUTO_INCREMENT",
+          "nullable": false,
+          "autoIncrement": true,
+          "default": null,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "SKU",
+          "type": "varchar(50)",
+          "definition": "varchar(50) NOT NULL",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": null,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "name",
+          "type": "varchar(250)",
+          "definition": "varchar(250) NOT NULL",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": null,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "definition": "text",
+          "nullable": true,
+          "autoIncrement": false,
+          "default": null,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "current_price",
+          "type": "decimal(10,2)",
+          "definition": "decimal(10,2) NOT NULL DEFAULT '0.00'",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": "'0.00'",
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "current_stock",
+          "type": "int",
+          "definition": "int unsigned NOT NULL DEFAULT '0'",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": "'0'",
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "status",
+          "type": "bit(1)",
+          "definition": "bit(1) DEFAULT b'1'",
+          "nullable": true,
+          "autoIncrement": false,
+          "default": "b'1'",
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime",
+          "definition": "datetime NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": "CURRENT_TIMESTAMP",
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "last_update",
+          "type": "datetime",
+          "definition": "datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": "CURRENT_TIMESTAMP",
+          "pk": false,
+          "fk": false
+        }
+      ],
+      "primaryKey": [
+        "ID"
+      ],
+      "indexes": [
+        {
+          "name": "SKU",
+          "unique": true,
+          "columns": [
+            "SKU"
+          ]
+        }
+      ],
+      "foreignKeys": [],
+      "rowCount": 5007,
+      "triggers": [
+        "trg_products_after_insert",
+        "trg_products_after_update",
+        "trg_products_after_delete"
+      ]
+    },
+    {
+      "name": "tb_users",
+      "columns": [
+        {
+          "name": "ID",
+          "type": "int",
+          "definition": "int NOT NULL AUTO_INCREMENT",
+          "nullable": false,
+          "autoIncrement": true,
+          "default": null,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "email",
+          "type": "varchar(100)",
+          "definition": "varchar(100) NOT NULL",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": null,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "nick",
+          "type": "varchar(50)",
+          "definition": "varchar(50) NOT NULL",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": null,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "password",
+          "type": "varchar(255)",
+          "definition": "varchar(255) NOT NULL",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": null,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime",
+          "definition": "datetime NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": "CURRENT_TIMESTAMP",
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "last_update",
+          "type": "datetime",
+          "definition": "datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP",
+          "nullable": true,
+          "autoIncrement": false,
+          "default": "NULL",
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "last_login",
+          "type": "datetime",
+          "definition": "datetime DEFAULT NULL",
+          "nullable": true,
+          "autoIncrement": false,
+          "default": "NULL",
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "status",
+          "type": "bit(1)",
+          "definition": "bit(1) DEFAULT b'1'",
+          "nullable": true,
+          "autoIncrement": false,
+          "default": "b'1'",
+          "pk": false,
+          "fk": false
+        }
+      ],
+      "primaryKey": [
+        "ID"
+      ],
+      "indexes": [
+        {
+          "name": "email",
+          "unique": true,
+          "columns": [
+            "email"
+          ]
+        },
+        {
+          "name": "nick",
+          "unique": true,
+          "columns": [
+            "nick"
+          ]
+        }
+      ],
+      "foreignKeys": [],
+      "rowCount": 8,
+      "triggers": [
+        "trg_users_after_insert",
+        "trg_users_after_update",
+        "trg_users_after_delete"
+      ]
+    },
+    {
+      "name": "tbc_categories",
+      "columns": [
+        {
+          "name": "ID",
+          "type": "int",
+          "definition": "int unsigned NOT NULL AUTO_INCREMENT",
+          "nullable": false,
+          "autoIncrement": true,
+          "default": null,
+          "pk": true,
+          "fk": false
+        },
+        {
+          "name": "name",
+          "type": "varchar(120)",
+          "definition": "varchar(120) NOT NULL",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": null,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "definition": "text",
+          "nullable": true,
+          "autoIncrement": false,
+          "default": null,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "sup_id_category",
+          "type": "int",
+          "definition": "int unsigned DEFAULT NULL",
+          "nullable": true,
+          "autoIncrement": false,
+          "default": "NULL",
+          "pk": false,
+          "fk": true
+        },
+        {
+          "name": "status",
+          "type": "bit(1)",
+          "definition": "bit(1) NOT NULL DEFAULT b'1'",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": "b'1'",
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime",
+          "definition": "datetime NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": "CURRENT_TIMESTAMP",
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "last_update",
+          "type": "datetime",
+          "definition": "datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": "CURRENT_TIMESTAMP",
+          "pk": false,
+          "fk": false
+        }
+      ],
+      "primaryKey": [
+        "ID"
+      ],
+      "indexes": [
+        {
+          "name": "name",
+          "unique": true,
+          "columns": [
+            "name"
+          ]
+        },
+        {
+          "name": "fk_superior_category",
+          "unique": false,
+          "columns": [
+            "sup_id_category"
+          ]
+        }
+      ],
+      "foreignKeys": [
+        {
+          "name": "fk_superior_category",
+          "columns": [
+            "sup_id_category"
+          ],
+          "target": "tbc_categories",
+          "targetColumns": [
+            "ID"
+          ],
+          "onDelete": "RESTRICT",
+          "onUpdate": "RESTRICT"
+        }
+      ],
+      "rowCount": 0,
+      "triggers": []
+    },
+    {
+      "name": "tbd_products_categorias",
+      "columns": [
+        {
+          "name": "product_ID",
+          "type": "int",
+          "definition": "int unsigned NOT NULL",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": null,
+          "pk": true,
+          "fk": true
+        },
+        {
+          "name": "category_ID",
+          "type": "int",
+          "definition": "int unsigned NOT NULL",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": null,
+          "pk": true,
+          "fk": true
+        },
+        {
+          "name": "status",
+          "type": "bit(1)",
+          "definition": "bit(1) NOT NULL DEFAULT b'1'",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": "b'1'",
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime",
+          "definition": "datetime NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": "CURRENT_TIMESTAMP",
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "last_update",
+          "type": "datetime",
+          "definition": "datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": "CURRENT_TIMESTAMP",
+          "pk": false,
+          "fk": false
+        }
+      ],
+      "primaryKey": [
+        "product_ID",
+        "category_ID"
+      ],
+      "indexes": [
+        {
+          "name": "fk_category1_idx",
+          "unique": false,
+          "columns": [
+            "category_ID"
+          ]
+        },
+        {
+          "name": "fk_product1_idx",
+          "unique": false,
+          "columns": [
+            "product_ID"
+          ]
+        }
+      ],
+      "foreignKeys": [
+        {
+          "name": "fk_category1",
+          "columns": [
+            "category_ID"
+          ],
+          "target": "tbc_categories",
+          "targetColumns": [
+            "ID"
+          ],
+          "onDelete": "RESTRICT",
+          "onUpdate": "RESTRICT"
+        },
+        {
+          "name": "fk_product1",
+          "columns": [
+            "product_ID"
+          ],
+          "target": "tb_products",
+          "targetColumns": [
+            "ID"
+          ],
+          "onDelete": "RESTRICT",
+          "onUpdate": "RESTRICT"
+        }
+      ],
+      "rowCount": 0,
+      "triggers": []
+    },
+    {
+      "name": "tbd_products_users_providers",
+      "columns": [
+        {
+          "name": "user_ID",
+          "type": "int",
+          "definition": "int NOT NULL",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": null,
+          "pk": true,
+          "fk": true
+        },
+        {
+          "name": "product_ID",
+          "type": "int",
+          "definition": "int unsigned NOT NULL",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": null,
+          "pk": true,
+          "fk": true
+        },
+        {
+          "name": "type_ownership",
+          "type": "enum('Owner','Reseller','Distributor')",
+          "definition": "enum('Owner','Reseller','Distributor') DEFAULT NULL",
+          "nullable": true,
+          "autoIncrement": false,
+          "default": "NULL",
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "status",
+          "type": "bit(1)",
+          "definition": "bit(1) NOT NULL DEFAULT b'1'",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": "b'1'",
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "avalaible_date",
+          "type": "datetime",
+          "definition": "datetime NOT NULL",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": null,
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime",
+          "definition": "datetime NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": "CURRENT_TIMESTAMP",
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "last_update",
+          "type": "datetime",
+          "definition": "datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": "CURRENT_TIMESTAMP",
+          "pk": false,
+          "fk": false
+        }
+      ],
+      "primaryKey": [
+        "user_ID",
+        "product_ID"
+      ],
+      "indexes": [
+        {
+          "name": "fk_products2",
+          "unique": false,
+          "columns": [
+            "product_ID"
+          ]
+        }
+      ],
+      "foreignKeys": [
+        {
+          "name": "fk_products2",
+          "columns": [
+            "product_ID"
+          ],
+          "target": "tb_products",
+          "targetColumns": [
+            "ID"
+          ],
+          "onDelete": "RESTRICT",
+          "onUpdate": "RESTRICT"
+        },
+        {
+          "name": "fk_user1",
+          "columns": [
+            "user_ID"
+          ],
+          "target": "tb_users",
+          "targetColumns": [
+            "ID"
+          ],
+          "onDelete": "RESTRICT",
+          "onUpdate": "RESTRICT"
+        }
+      ],
+      "rowCount": 0,
+      "triggers": []
+    },
+    {
+      "name": "tbd_users_wishlist_products",
+      "columns": [
+        {
+          "name": "user_ID",
+          "type": "int",
+          "definition": "int NOT NULL",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": null,
+          "pk": true,
+          "fk": true
+        },
+        {
+          "name": "product_ID",
+          "type": "int",
+          "definition": "int unsigned NOT NULL",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": null,
+          "pk": true,
+          "fk": true
+        },
+        {
+          "name": "status",
+          "type": "bit(1)",
+          "definition": "bit(1) NOT NULL DEFAULT b'1'",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": "b'1'",
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime",
+          "definition": "datetime NOT NULL DEFAULT CURRENT_TIMESTAMP",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": "CURRENT_TIMESTAMP",
+          "pk": false,
+          "fk": false
+        },
+        {
+          "name": "last_update",
+          "type": "datetime",
+          "definition": "datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP",
+          "nullable": false,
+          "autoIncrement": false,
+          "default": "CURRENT_TIMESTAMP",
+          "pk": false,
+          "fk": false
+        }
+      ],
+      "primaryKey": [
+        "user_ID",
+        "product_ID"
+      ],
+      "indexes": [
+        {
+          "name": "fk_products3",
+          "unique": false,
+          "columns": [
+            "product_ID"
+          ]
+        }
+      ],
+      "foreignKeys": [
+        {
+          "name": "fk_products3",
+          "columns": [
+            "product_ID"
+          ],
+          "target": "tb_products",
+          "targetColumns": [
+            "ID"
+          ],
+          "onDelete": "RESTRICT",
+          "onUpdate": "RESTRICT"
+        },
+        {
+          "name": "fk_user2",
+          "columns": [
+            "user_ID"
+          ],
+          "target": "tb_users",
+          "targetColumns": [
+            "ID"
+          ],
+          "onDelete": "RESTRICT",
+          "onUpdate": "RESTRICT"
+        }
+      ],
+      "rowCount": 0,
+      "triggers": []
+    }
+  ]
+}
