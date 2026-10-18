@@ -21,8 +21,8 @@ services:
     container_name: pgadmin_240597
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: "marco.ramirez@utxicotepec.edu.mx"
-      PGADMIN_DEFAULT_PASSWORD: "qwerty1234?"
+      PGADMIN_DEFAULT_EMAIL: "mario.banda@utxicotepec.edu.mx"
+      PGADMIN_DEFAULT_PASSWORD: "509006"
       PGADMIN_CONFIG_SERVER_MODE: "False"
     ports:
       - "40597:80"
