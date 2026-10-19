@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  # Servicio de Base de Datos PostgreSQL
+  # Servicio PostgreSQL
   postgres_240597:
     image: postgres:15-alpine
     container_name: postgres_240597
@@ -11,24 +11,41 @@ services:
       POSTGRES_USER: mario.banda
       POSTGRES_PASSWORD: "Tacosdepastor"
     ports:
-      - "5432:5432"
+      - "40597:5432"
     volumes:
       - postgres_data_240597:/var/lib/postgresql/data
 
-  # Servicio de Interfaz Web pgAdmin
+  # Servicio pgAdmin
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin_240597
     restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: "mario.banda@utxicotepec.edu.mx"
-      PGADMIN_DEFAULT_PASSWORD: "509006"
+      PGADMIN_DEFAULT_PASSWORD: "240597"
       PGADMIN_CONFIG_SERVER_MODE: "True"
     ports:
-      - "40597:80"
+      - "40596:80"
     depends_on:
       - postgres_240597
 
+  # Servicio MySQL
+  mysql_240597:
+    image: mysql:8.0
+    container_name: mysql_240597
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "1234"
+      MYSQL_DATABASE: db_test_7b
+      MYSQL_USER: mario.banda
+      MYSQL_PASSWORD: "240597"
+    ports:
+      - "40598:3306"   
+    volumes:
+      - mysql_data_240597:/var/lib/mysql
+
 volumes:
   postgres_data_240597:
+    driver: local
+  mysql_data_240597:
     driver: local
