@@ -23,7 +23,7 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: "mario.banda@utxicotepec.edu.mx"
       PGADMIN_DEFAULT_PASSWORD: "509006"
-      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_CONFIG_SERVER_MODE: "True"
     ports:
       - "40597:80"
     depends_on:
