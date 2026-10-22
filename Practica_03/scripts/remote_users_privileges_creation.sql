@@ -1,4 +1,8 @@
--- Eliminar usuarios si ya existen antes de crearlos
+USE `db_test_7b`;
+
+-- =========================================================
+-- 1. CREACIÓN / LIMPIEZA DE USUARIOS
+-- =========================================================
 DROP USER IF EXISTS 'marco.ramirez'@'%';
 CREATE USER 'marco.ramirez'@'%' IDENTIFIED BY 'qwerty123';
 
@@ -14,14 +18,14 @@ CREATE USER 'alfonso.garcia'@'%' IDENTIFIED BY '240904';
 DROP USER IF EXISTS 'jona.papu'@'%';
 CREATE USER 'jona.papu'@'%' IDENTIFIED BY '240080';
 
-/* Asignar los privilegios de super usuario (Nota: Corregido PRIVILEGIES -> PRIVILEGES) */
-GRANT ALL PRIVILEGES ON *.* TO 'mario.banda'@'%';
+-- Usuarios Middleware / Apps
+CREATE USER IF NOT EXISTS 'app_web'@'%' IDENTIFIED BY 'Web123';
+CREATE USER IF NOT EXISTS 'app_mobile'@'%' IDENTIFIED BY 'Mobile890';
 
-/* Asignar Privilegios de seleccion, insercion, Actualizacion y eliminacion a vane 
-   (Nota: Corregido el nombre de usuario 'alfonso.garcia' a 'alfonso.garcia') */
-GRANT SELECT, UPDATE, INSERT, DELETE ON db_test_7b.* TO 'alfonso.garcia'@'%';
 
-/* Creacion de roles para el sistema ecomerce */
+-- =========================================================
+-- 2. CREACIÓN DE ROLES
+-- =========================================================
 CREATE ROLE IF NOT EXISTS 'superadmin';
 CREATE ROLE IF NOT EXISTS 'admin';
 CREATE ROLE IF NOT EXISTS 'seller';
@@ -30,29 +34,62 @@ CREATE ROLE IF NOT EXISTS 'support';
 CREATE ROLE IF NOT EXISTS 'common';
 CREATE ROLE IF NOT EXISTS 'user_not_registered';
 
-/* Asignar Privilegios a los roles creados */
 
-/*Superadmin*/
-Grant ALL PRIVILEGES ON *.* TO 'superadmin';
+-- =========================================================
+-- 3. ASIGNACIÓN DE PRIVILEGIOS A LOS ROLES
+-- =========================================================
 
--- ADMIN
+-- Superadmin
+GRANT ALL PRIVILEGES ON *.* TO 'superadmin' WITH GRANT OPTION;
+
+-- Admin
 GRANT ALL PRIVILEGES ON db_test_7b.* TO 'admin';
 
--- support
+-- Support
 GRANT SELECT, UPDATE, INSERT ON db_test_7b.tb_users TO 'support';
 GRANT SELECT, UPDATE, INSERT ON db_test_7b.tb_products TO 'support';
 
-/*Seller*/
-Grant select,insert, update on db_test_7b.tb_products to 'seller';
+-- Seller
+GRANT SELECT, INSERT, UPDATE ON db_test_7b.tb_products TO 'seller';
 
-/* Asignar rol a los usuarios creados */
+-- User Not Registered (CORREGIDO: Solo EXECUTE para la rutina)
+GRANT INSERT ON db_test_7b.tb_users TO 'user_not_registered';
+GRANT INSERT ON db_test_7b.tb_people TO 'user_not_registered';
+GRANT EXECUTE ON PROCEDURE db_test_7b.sp_register_new_user TO 'user_not_registered';
+
+
+-- =========================================================
+-- 4. PRIVILEGIOS DIRECTOS Y ASIGNACIÓN DE ROLES A USUARIOS
+-- =========================================================
+
+-- Permisos directos de superusuario a tu cuenta
+GRANT ALL PRIVILEGES ON *.* TO 'mario.banda'@'%' WITH GRANT OPTION;
+GRANT SELECT, UPDATE, INSERT, DELETE ON db_test_7b.* TO 'alfonso.garcia'@'%';
+
+-- Asignar roles a las cuentas del equipo
 GRANT 'admin' TO 'marco.ramirez'@'%';
 GRANT 'seller' TO 'alfonso.garcia'@'%';
 GRANT 'support' TO 'aaron.ali'@'%';
 GRANT 'superadmin' TO 'mario.banda'@'%';
 GRANT 'seller' TO 'jona.papu'@'%';
 
--- Nota: Para que los roles se apliquen automáticamente al iniciar sesión, puedes activar el siguiente comando:
--- SET DEFAULT ROLE 'admin' TO 'marco.ramirez'@'%';
-SET DEFAULT ROLE 'support' TO 'aaron.ali'@'%';
--- SET DEFAULT ROLE 'seller' TO 'aaron.ali'@'%';
+-- Asignar roles a las credenciales de conexión para las apps
+GRANT 'user_not_registered' TO 'app_web'@'%';
+GRANT 'user_not_registered' TO 'app_mobile'@'%';
+
+
+-- =========================================================
+-- 5. ACTIVACIÓN DE ROLES POR DEFECTO Y APLICACIÓN DE CAMBIOS
+-- =========================================================
+
+-- Activa automáticamente todos los roles asignados al iniciar sesión
+SET DEFAULT ROLE ALL TO 
+    'marco.ramirez'@'%',
+    'mario.banda'@'%',
+    'alfonso.garcia'@'%',
+    'aaron.ali'@'%',
+    'jona.papu'@'%',
+    'app_web'@'%',
+    'app_mobile'@'%';
+
+FLUSH PRIVILEGES;

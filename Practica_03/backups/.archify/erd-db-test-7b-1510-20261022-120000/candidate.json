@@ -1,0 +1,534 @@
+{
+  "schema_version": 1,
+  "diagram_type": "erd",
+  "meta": {
+    "title": "Modelo EER · db_test_7b",
+    "locale": "es",
+    "output": ".archify/erd-db-test-7b-1510-20261022-120000/db-test-7b-1510.html",
+    "quality_profile": "standard",
+    "subtitle": "8 tablas · 10,048 filas declaradas en INSERT · MySQL 8.0.36",
+    "legend": {
+      "mode": "all",
+      "entries": {
+        "pk": {
+          "label": "Clave primaria"
+        },
+        "fk": {
+          "label": "Clave foránea"
+        },
+        "uk": {
+          "label": "Única"
+        }
+      }
+    }
+  },
+  "layout": {
+    "mode": "grid",
+    "gapX": 60,
+    "gapY": 34
+  },
+  "entities": [
+    {
+      "id": "tb_carts",
+      "label": "tb_carts",
+      "sublabel": "0 registros · 5 columnas",
+      "tag": "Identidad",
+      "row": 1,
+      "col": 0,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned · NOT NULL · AUTO_INCREMENT",
+          "key": "pk"
+        },
+        {
+          "name": "user_ID",
+          "type": "int · NOT NULL",
+          "key": [
+            "uk",
+            "fk"
+          ],
+          "references": "tb_users.ID"
+        },
+        {
+          "name": "status",
+          "type": "bit(1) · DEFAULT b'1'"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime · NOT NULL · DEFAULT CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime · NULL · DEFAULT NULL · ON UPDATE CURRENT_TIMESTAMP"
+        }
+      ]
+    },
+    {
+      "id": "tb_logs",
+      "label": "tb_logs",
+      "sublabel": "5,033 registros · 7 columnas",
+      "tag": "Auditoría",
+      "row": 0,
+      "col": 2,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int · NOT NULL · AUTO_INCREMENT",
+          "key": "pk"
+        },
+        {
+          "name": "table_name",
+          "type": "varchar(80) · NOT NULL"
+        },
+        {
+          "name": "table_operation",
+          "type": "enum('Create','Read','Update','Delete') · NULL · DEFAULT NULL"
+        },
+        {
+          "name": "db_user",
+          "type": "varchar(80) · NOT NULL"
+        },
+        {
+          "name": "operation_date",
+          "type": "datetime · NOT NULL · DEFAULT CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "table_description",
+          "type": "text · NOT NULL"
+        },
+        {
+          "name": "operation_status",
+          "type": "bit(1) · DEFAULT b'1'"
+        }
+      ]
+    },
+    {
+      "id": "tb_products",
+      "label": "tb_products",
+      "sublabel": "5,007 registros · 9 columnas",
+      "tag": "Catálogo",
+      "row": 0,
+      "col": 1,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned · NOT NULL · AUTO_INCREMENT",
+          "key": "pk"
+        },
+        {
+          "name": "SKU",
+          "type": "varchar(50) · NOT NULL",
+          "key": "uk"
+        },
+        {
+          "name": "name",
+          "type": "varchar(250) · NOT NULL"
+        },
+        {
+          "name": "description",
+          "type": "text"
+        },
+        {
+          "name": "current_price",
+          "type": "decimal(10,2) · NOT NULL · DEFAULT '0.00'"
+        },
+        {
+          "name": "current_stock",
+          "type": "int unsigned · NOT NULL · DEFAULT '0'"
+        },
+        {
+          "name": "status",
+          "type": "bit(1) · DEFAULT b'1'"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime · NOT NULL · DEFAULT CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime · NOT NULL · DEFAULT CURRENT_TIMESTAMP · ON UPDATE CURRENT_TIMESTAMP"
+        }
+      ]
+    },
+    {
+      "id": "tb_users",
+      "label": "tb_users",
+      "sublabel": "8 registros · 8 columnas",
+      "tag": "Identidad",
+      "row": 0,
+      "col": 0,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int · NOT NULL · AUTO_INCREMENT",
+          "key": "pk"
+        },
+        {
+          "name": "email",
+          "type": "varchar(100) · NOT NULL",
+          "key": "uk"
+        },
+        {
+          "name": "nick",
+          "type": "varchar(50) · NOT NULL",
+          "key": "uk"
+        },
+        {
+          "name": "password",
+          "type": "varchar(255) · NOT NULL"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime · NOT NULL · DEFAULT CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime · NULL · DEFAULT NULL · ON UPDATE CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "last_login",
+          "type": "datetime · NULL · DEFAULT NULL"
+        },
+        {
+          "name": "status",
+          "type": "bit(1) · DEFAULT b'1'"
+        }
+      ]
+    },
+    {
+      "id": "tbc_categories",
+      "label": "tbc_categories",
+      "sublabel": "0 registros · 7 columnas",
+      "tag": "Catálogo",
+      "row": 1,
+      "col": 1,
+      "attributes": [
+        {
+          "name": "ID",
+          "type": "int unsigned · NOT NULL · AUTO_INCREMENT",
+          "key": "pk"
+        },
+        {
+          "name": "name",
+          "type": "varchar(120) · NOT NULL",
+          "key": "uk"
+        },
+        {
+          "name": "description",
+          "type": "text"
+        },
+        {
+          "name": "sup_id_category",
+          "type": "int unsigned · NULL · DEFAULT NULL",
+          "key": "fk",
+          "references": "tbc_categories.ID"
+        },
+        {
+          "name": "status",
+          "type": "bit(1) · NOT NULL · DEFAULT b'1'"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime · NOT NULL · DEFAULT CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime · NOT NULL · DEFAULT CURRENT_TIMESTAMP · ON UPDATE CURRENT_TIMESTAMP"
+        }
+      ]
+    },
+    {
+      "id": "tbd_products_categorias",
+      "label": "tbd_products_categorias",
+      "sublabel": "0 registros · 5 columnas",
+      "tag": "Relaciones",
+      "row": 0,
+      "col": 3,
+      "attributes": [
+        {
+          "name": "product_ID",
+          "type": "int unsigned · NOT NULL",
+          "key": [
+            "pk",
+            "fk"
+          ],
+          "references": "tb_products.ID"
+        },
+        {
+          "name": "category_ID",
+          "type": "int unsigned · NOT NULL",
+          "key": [
+            "pk",
+            "fk"
+          ],
+          "references": "tbc_categories.ID"
+        },
+        {
+          "name": "status",
+          "type": "bit(1) · NOT NULL · DEFAULT b'1'"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime · NOT NULL · DEFAULT CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime · NOT NULL · DEFAULT CURRENT_TIMESTAMP · ON UPDATE CURRENT_TIMESTAMP"
+        }
+      ]
+    },
+    {
+      "id": "tbd_products_users_providers",
+      "label": "tbd_products_users_providers",
+      "sublabel": "0 registros · 7 columnas",
+      "tag": "Relaciones",
+      "row": 1,
+      "col": 3,
+      "attributes": [
+        {
+          "name": "user_ID",
+          "type": "int · NOT NULL",
+          "key": [
+            "pk",
+            "fk"
+          ],
+          "references": "tb_users.ID"
+        },
+        {
+          "name": "product_ID",
+          "type": "int unsigned · NOT NULL",
+          "key": [
+            "pk",
+            "fk"
+          ],
+          "references": "tb_products.ID"
+        },
+        {
+          "name": "type_ownership",
+          "type": "enum('Owner','Reseller','Distributor') · NULL · DEFAULT NULL"
+        },
+        {
+          "name": "status",
+          "type": "bit(1) · NOT NULL · DEFAULT b'1'"
+        },
+        {
+          "name": "avalaible_date",
+          "type": "datetime · NOT NULL"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime · NOT NULL · DEFAULT CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime · NOT NULL · DEFAULT CURRENT_TIMESTAMP · ON UPDATE CURRENT_TIMESTAMP"
+        }
+      ]
+    },
+    {
+      "id": "tbd_users_wishlist_products",
+      "label": "tbd_users_wishlist_products",
+      "sublabel": "0 registros · 5 columnas",
+      "tag": "Relaciones",
+      "row": 2,
+      "col": 3,
+      "attributes": [
+        {
+          "name": "user_ID",
+          "type": "int · NOT NULL",
+          "key": [
+            "pk",
+            "fk"
+          ],
+          "references": "tb_users.ID"
+        },
+        {
+          "name": "product_ID",
+          "type": "int unsigned · NOT NULL",
+          "key": [
+            "pk",
+            "fk"
+          ],
+          "references": "tb_products.ID"
+        },
+        {
+          "name": "status",
+          "type": "bit(1) · NOT NULL · DEFAULT b'1'"
+        },
+        {
+          "name": "creation_date",
+          "type": "datetime · NOT NULL · DEFAULT CURRENT_TIMESTAMP"
+        },
+        {
+          "name": "last_update",
+          "type": "datetime · NOT NULL · DEFAULT CURRENT_TIMESTAMP · ON UPDATE CURRENT_TIMESTAMP"
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "tb_carts_ibfk_1",
+      "from": "tb_carts",
+      "to": "tb_users",
+      "label": "tb_carts_ibfk_1 · DELETE NO ESPECIFICADO · UPDATE NO ESPECIFICADO",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "fromOptional": false,
+      "toOptional": true,
+      "identifying": false
+    },
+    {
+      "id": "fk_superior_category",
+      "from": "tbc_categories",
+      "to": "tbc_categories",
+      "label": "fk_superior_category · DELETE NO ESPECIFICADO · UPDATE NO ESPECIFICADO",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "fromOptional": true,
+      "toOptional": true,
+      "identifying": false
+    },
+    {
+      "id": "fk_category1",
+      "from": "tbd_products_categorias",
+      "to": "tbc_categories",
+      "label": "fk_category1 · DELETE NO ESPECIFICADO · UPDATE NO ESPECIFICADO",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "fromOptional": false,
+      "toOptional": true,
+      "identifying": true
+    },
+    {
+      "id": "fk_product1",
+      "from": "tbd_products_categorias",
+      "to": "tb_products",
+      "label": "fk_product1 · DELETE NO ESPECIFICADO · UPDATE NO ESPECIFICADO",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "fromOptional": false,
+      "toOptional": true,
+      "identifying": true
+    },
+    {
+      "id": "fk_products2",
+      "from": "tbd_products_users_providers",
+      "to": "tb_products",
+      "label": "fk_products2 · DELETE NO ESPECIFICADO · UPDATE NO ESPECIFICADO",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "fromOptional": false,
+      "toOptional": true,
+      "identifying": true
+    },
+    {
+      "id": "fk_user1",
+      "from": "tbd_products_users_providers",
+      "to": "tb_users",
+      "label": "fk_user1 · DELETE NO ESPECIFICADO · UPDATE NO ESPECIFICADO",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "fromOptional": false,
+      "toOptional": true,
+      "identifying": true
+    },
+    {
+      "id": "fk_products3",
+      "from": "tbd_users_wishlist_products",
+      "to": "tb_products",
+      "label": "fk_products3 · DELETE NO ESPECIFICADO · UPDATE NO ESPECIFICADO",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "fromOptional": false,
+      "toOptional": true,
+      "identifying": true
+    },
+    {
+      "id": "fk_user2",
+      "from": "tbd_users_wishlist_products",
+      "to": "tb_users",
+      "label": "fk_user2 · DELETE NO ESPECIFICADO · UPDATE NO ESPECIFICADO",
+      "fromCardinality": "many",
+      "toCardinality": "one",
+      "fromOptional": false,
+      "toOptional": true,
+      "identifying": true
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "tb_carts · índices y triggers",
+      "items": [
+        "PK: ID",
+        "UNIQUE uk_cart_user: user_ID"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "tb_logs · índices y triggers",
+      "items": [
+        "PK: ID"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "tb_products · índices y triggers",
+      "items": [
+        "PK: ID",
+        "UNIQUE SKU: SKU",
+        "Trigger: trg_products_after_insert · AFTER INSERT",
+        "Trigger: trg_products_after_update · AFTER UPDATE",
+        "Trigger: trg_products_after_delete · AFTER DELETE"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "tb_users · índices y triggers",
+      "items": [
+        "PK: ID",
+        "UNIQUE email: email",
+        "UNIQUE nick: nick",
+        "Trigger: trg_users_after_insert · AFTER INSERT",
+        "Trigger: trg_users_after_update · AFTER UPDATE",
+        "Trigger: trg_users_after_delete · AFTER DELETE"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "tbc_categories · índices y triggers",
+      "items": [
+        "PK: ID",
+        "UNIQUE name: name",
+        "INDEX fk_superior_category: sup_id_category"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "tbd_products_categorias · índices y triggers",
+      "items": [
+        "PK: product_ID, category_ID",
+        "INDEX fk_category1_idx: category_ID",
+        "INDEX fk_product1_idx: product_ID"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "tbd_products_users_providers · índices y triggers",
+      "items": [
+        "PK: user_ID, product_ID",
+        "INDEX fk_products2: product_ID"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "tbd_users_wishlist_products · índices y triggers",
+      "items": [
+        "PK: user_ID, product_ID",
+        "INDEX fk_products3: product_ID"
+      ]
+    }
+  ]
+}
