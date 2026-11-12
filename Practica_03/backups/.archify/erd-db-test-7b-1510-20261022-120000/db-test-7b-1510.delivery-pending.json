@@ -1,8 +1,0 @@
-{
-  "schemaVersion": 1,
-  "command": "deliver",
-  "status": "pending",
-  "receiptId": "c416a4be-d284-45e1-8f18-1834d3138eb2",
-  "input": "C:\\Users\\ti_la\\Documents\\practicas-bdn\\Practicas_BDN_240597-2\\Practica_03\\backups\\.archify\\erd-db-test-7b-1510-20261022-120000\\candidate.json",
-  "output": "C:\\Users\\ti_la\\Documents\\practicas-bdn\\Practicas_BDN_240597-2\\Practica_03\\backups\\.archify\\erd-db-test-7b-1510-20261022-120000\\db-test-7b-1510.html"
-}
