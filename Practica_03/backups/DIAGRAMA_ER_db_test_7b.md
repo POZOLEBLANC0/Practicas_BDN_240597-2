@@ -5,6 +5,7 @@ DER extraído del DDL `db_test_7b1211.sql`. Cardinalidad determinada por nulabil
 ```mermaid
 erDiagram
     tb_buyer_orders {
+        int registros "0 reg."
         int_unsigned ID PK
         int seller_ID FK
         decimal_12_2 subtotal
@@ -15,6 +16,7 @@ erDiagram
         datetime last_update
     }
     tb_carts {
+        int registros "0 reg."
         int_unsigned ID PK
         int user_ID FK, UK
         bit_1 status
@@ -22,6 +24,7 @@ erDiagram
         datetime last_update
     }
     tb_logs {
+        int registros "44,610 reg."
         int ID PK
         varchar_80 table_name
         enum_Create_Read_Update_Delete table_operation
@@ -31,6 +34,7 @@ erDiagram
         bit_1 operation_status
     }
     tb_order_cancellations {
+        int registros "0 reg."
         int_unsigned ID PK
         int_unsigned order_ID FK
         text reason
@@ -41,6 +45,7 @@ erDiagram
         timestamp last_update
     }
     tb_payment_methods {
+        int registros "0 reg."
         int_unsigned ID PK
         int user_ID FK
         varchar_50 name
@@ -52,6 +57,7 @@ erDiagram
         timestamp last_update
     }
     tb_payment_transaction {
+        int registros "0 reg."
         int_unsigned ID PK
         int_unsigned payment_ID FK
         varchar_255 transaction_ref
@@ -63,6 +69,7 @@ erDiagram
         timestamp last_update
     }
     tb_payments {
+        int registros "0 reg."
         int_unsigned ID PK
         int_unsigned order_ID FK
         bigint_unsigned user_payment_method_ID FK
@@ -74,6 +81,7 @@ erDiagram
         timestamp last_update
     }
     tb_people {
+        int registros "7,502 reg."
         bigint_unsigned person_ID PK
         int user_ID FK, UK
         varchar_20 courtesy_title
@@ -88,6 +96,7 @@ erDiagram
         datetime last_update
     }
     tb_products {
+        int registros "7,007 reg."
         int_unsigned ID PK
         varchar_50 SKU UK
         varchar_250 name
@@ -99,6 +108,7 @@ erDiagram
         datetime last_update
     }
     tb_refunds {
+        int registros "0 reg."
         int_unsigned ID PK
         int_unsigned order_ID FK
         text reason
@@ -110,6 +120,7 @@ erDiagram
         timestamp last_update
     }
     tb_returns {
+        int registros "0 reg."
         int_unsigned ID PK
         int_unsigned order_ID FK
         text reason
@@ -120,6 +131,7 @@ erDiagram
         timestamp last_update
     }
     tb_shipments {
+        int registros "0 reg."
         int_unsigned ID PK
         int_unsigned order_ID FK
         bigint_unsigned address_ID FK
@@ -132,6 +144,7 @@ erDiagram
         timestamp last_update
     }
     tb_user_addresses {
+        int registros "0 reg."
         bigint_unsigned ID PK
         int user_ID FK
         varchar_100 address_label
@@ -146,6 +159,7 @@ erDiagram
         datetime last_update
     }
     tb_users {
+        int registros "7,510 reg."
         int ID PK
         varchar_100 email UK
         varchar_50 nick UK
@@ -156,6 +170,7 @@ erDiagram
         bit_1 status
     }
     tbc_categories {
+        int registros "100 reg."
         int_unsigned ID PK
         varchar_120 name UK
         text description
@@ -165,6 +180,7 @@ erDiagram
         datetime last_update
     }
     tbc_payment_methods_types {
+        int registros "0 reg."
         int_unsigned ID PK
         varchar_30 code
         text description
@@ -173,6 +189,7 @@ erDiagram
         datetime last_update
     }
     tbd_address_components {
+        int registros "0 reg."
         bigint_unsigned ID PK, UK
         bigint_unsigned address_ID FK, UK
         varchar_255 value
@@ -183,6 +200,7 @@ erDiagram
         datetime last_update
     }
     tbd_cancellation_items {
+        int registros "0 reg."
         int_unsigned cancellation_ID PK, FK
         int_unsigned product_ID PK, FK
         int_unsigned quantity
@@ -192,6 +210,7 @@ erDiagram
         timestamp last_update
     }
     tbd_carts_items {
+        int registros "0 reg."
         int_unsigned cart_ID PK, FK
         int provider_ID PK, FK
         int_unsigned product_ID PK, FK
@@ -199,6 +218,7 @@ erDiagram
         datetime creation_date
     }
     tbd_order_items {
+        int registros "0 reg."
         int_unsigned ID PK
         int_unsigned seller_order_ID FK
         int_unsigned product_ID FK
@@ -210,6 +230,7 @@ erDiagram
         datetime creation_date
     }
     tbd_products_categorias {
+        int registros "15,348 reg."
         int_unsigned product_ID PK, FK
         int_unsigned category_ID PK, FK
         bit_1 status
@@ -217,6 +238,7 @@ erDiagram
         datetime last_update
     }
     tbd_products_users_providers {
+        int registros "7,007 reg."
         int user_ID PK, FK
         int_unsigned product_ID PK, FK
         enum_Owner_Reseller_Distributor type_ownership
@@ -226,6 +248,7 @@ erDiagram
         datetime last_update
     }
     tbd_return_items {
+        int registros "0 reg."
         int_unsigned return_ID PK, FK
         int_unsigned product_ID PK, FK
         int_unsigned quantity
@@ -235,6 +258,7 @@ erDiagram
         timestamp last_update
     }
     tbd_user_payment_methods {
+        int registros "0 reg."
         bigint_unsigned ID PK
         int user_ID FK
         int_unsigned payment_method_type_ID FK
@@ -248,6 +272,7 @@ erDiagram
         datetime last_update
     }
     tbd_users_wishlist_products {
+        int registros "0 reg."
         int user_ID PK, FK
         int_unsigned product_ID PK, FK
         bit_1 status

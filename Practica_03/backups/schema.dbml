@@ -4,6 +4,7 @@ Project db_test_7b {
 }
 
 Table tb_buyer_orders {
+  Note: 'Registros: 0'
   ID int unsigned [pk, not null, increment]
   seller_ID int [not null]
   subtotal decimal(12,2) [not null, default: '0.00']
@@ -15,6 +16,7 @@ Table tb_buyer_orders {
 }
 
 Table tb_carts {
+  Note: 'Registros: 0'
   ID int unsigned [pk, not null, increment]
   user_ID int [unique, not null]
   status bit(1) [default: `b'1'`]
@@ -23,6 +25,7 @@ Table tb_carts {
 }
 
 Table tb_logs {
+  Note: 'Registros: 44,610'
   ID int [pk, not null, increment]
   table_name varchar(80) [not null]
   table_operation enum('Create','Read','Update','Delete') [default: null]
@@ -33,6 +36,7 @@ Table tb_logs {
 }
 
 Table tb_order_cancellations {
+  Note: 'Registros: 0'
   ID int unsigned [pk, not null, increment]
   order_ID int unsigned [not null]
   reason text
@@ -44,6 +48,7 @@ Table tb_order_cancellations {
 }
 
 Table tb_payment_methods {
+  Note: 'Registros: 0'
   ID int unsigned [pk, not null, increment]
   user_ID int [not null]
   name varchar(50) [default: null]
@@ -56,6 +61,7 @@ Table tb_payment_methods {
 }
 
 Table tb_payment_transaction {
+  Note: 'Registros: 0'
   ID int unsigned [pk, not null, increment]
   payment_ID int unsigned [not null]
   transaction_ref varchar(255) [default: null]
@@ -68,6 +74,7 @@ Table tb_payment_transaction {
 }
 
 Table tb_payments {
+  Note: 'Registros: 0'
   ID int unsigned [pk, not null, increment]
   order_ID int unsigned [not null]
   user_payment_method_ID bigint unsigned [default: null]
@@ -80,6 +87,7 @@ Table tb_payments {
 }
 
 Table tb_people {
+  Note: 'Registros: 7,502'
   person_ID bigint unsigned [pk, not null, increment]
   user_ID int [unique, default: null]
   courtesy_title varchar(20) [default: null]
@@ -95,6 +103,7 @@ Table tb_people {
 }
 
 Table tb_products {
+  Note: 'Registros: 7,007'
   ID int unsigned [pk, not null, increment]
   SKU varchar(50) [unique, not null]
   name varchar(250) [not null]
@@ -107,6 +116,7 @@ Table tb_products {
 }
 
 Table tb_refunds {
+  Note: 'Registros: 0'
   ID int unsigned [pk, not null, increment]
   order_ID int unsigned [not null]
   reason text
@@ -119,6 +129,7 @@ Table tb_refunds {
 }
 
 Table tb_returns {
+  Note: 'Registros: 0'
   ID int unsigned [pk, not null, increment]
   order_ID int unsigned [not null]
   reason text
@@ -130,6 +141,7 @@ Table tb_returns {
 }
 
 Table tb_shipments {
+  Note: 'Registros: 0'
   ID int unsigned [pk, not null, increment]
   order_ID int unsigned [not null]
   address_ID bigint unsigned [default: null]
@@ -143,6 +155,7 @@ Table tb_shipments {
 }
 
 Table tb_user_addresses {
+  Note: 'Registros: 0'
   ID bigint unsigned [pk, not null, increment]
   user_ID int [not null]
   address_label varchar(100) [not null]
@@ -158,6 +171,7 @@ Table tb_user_addresses {
 }
 
 Table tb_users {
+  Note: 'Registros: 7,510'
   ID int [pk, not null, increment]
   email varchar(100) [unique, not null]
   nick varchar(50) [unique, not null]
@@ -169,6 +183,7 @@ Table tb_users {
 }
 
 Table tbc_categories {
+  Note: 'Registros: 100'
   ID int unsigned [pk, not null, increment]
   name varchar(120) [unique, not null]
   description text
@@ -179,6 +194,7 @@ Table tbc_categories {
 }
 
 Table tbc_payment_methods_types {
+  Note: 'Registros: 0'
   ID int unsigned [pk, not null, increment]
   code varchar(30) [not null]
   description text [not null]
@@ -188,6 +204,7 @@ Table tbc_payment_methods_types {
 }
 
 Table tbd_address_components {
+  Note: 'Registros: 0'
   ID bigint unsigned [pk, not null, increment]
   address_ID bigint unsigned [not null]
   value varchar(255) [not null]
@@ -202,6 +219,7 @@ Table tbd_address_components {
 }
 
 Table tbd_cancellation_items {
+  Note: 'Registros: 0'
   cancellation_ID int unsigned [not null]
   product_ID int unsigned [not null]
   quantity int unsigned [default: null]
@@ -215,6 +233,7 @@ Table tbd_cancellation_items {
 }
 
 Table tbd_carts_items {
+  Note: 'Registros: 0'
   cart_ID int unsigned [not null]
   provider_ID int [not null]
   product_ID int unsigned [not null]
@@ -226,6 +245,7 @@ Table tbd_carts_items {
 }
 
 Table tbd_order_items {
+  Note: 'Registros: 0'
   ID int unsigned [pk, not null, increment]
   seller_order_ID int unsigned [not null]
   product_ID int unsigned [not null]
@@ -238,6 +258,7 @@ Table tbd_order_items {
 }
 
 Table tbd_products_categorias {
+  Note: 'Registros: 15,348'
   product_ID int unsigned [not null]
   category_ID int unsigned [not null]
   status bit(1) [not null, default: `b'1'`]
@@ -249,6 +270,7 @@ Table tbd_products_categorias {
 }
 
 Table tbd_products_users_providers {
+  Note: 'Registros: 7,007'
   user_ID int [not null]
   product_ID int unsigned [not null]
   type_ownership enum('Owner','Reseller','Distributor') [default: null]
@@ -262,6 +284,7 @@ Table tbd_products_users_providers {
 }
 
 Table tbd_return_items {
+  Note: 'Registros: 0'
   return_ID int unsigned [not null]
   product_ID int unsigned [not null]
   quantity int unsigned [default: null]
@@ -275,6 +298,7 @@ Table tbd_return_items {
 }
 
 Table tbd_user_payment_methods {
+  Note: 'Registros: 0'
   ID bigint unsigned [pk, not null, increment]
   user_ID int [not null]
   payment_method_type_ID int unsigned [not null]
@@ -292,6 +316,7 @@ Table tbd_user_payment_methods {
 }
 
 Table tbd_users_wishlist_products {
+  Note: 'Registros: 0'
   user_ID int [not null]
   product_ID int unsigned [not null]
   status bit(1) [not null, default: `b'1'`]
@@ -337,6 +362,7 @@ Ref fk_products3: tbd_users_wishlist_products.product_ID > tb_products.ID
 Ref fk_user2: tbd_users_wishlist_products.user_ID > tb_users.ID
 
 TableGroup "Usuarios y Seguridad" [color: #DDEBFF] {
+  Note: '6 tablas; registros: 15,012'
   tb_users
   tb_people
   tb_user_addresses
@@ -346,6 +372,7 @@ TableGroup "Usuarios y Seguridad" [color: #DDEBFF] {
 }
 
 TableGroup "Catálogo y Productos" [color: #E3F5E8] {
+  Note: '5 tablas; registros: 29,462'
   tb_products
   tbc_categories
   tbd_products_categorias
@@ -354,6 +381,7 @@ TableGroup "Catálogo y Productos" [color: #E3F5E8] {
 }
 
 TableGroup "Órdenes y Pagos" [color: #FFF0D6] {
+  Note: '7 tablas; registros: 0'
   tb_buyer_orders
   tb_carts
   tb_payment_methods
@@ -364,6 +392,7 @@ TableGroup "Órdenes y Pagos" [color: #FFF0D6] {
 }
 
 TableGroup "Envíos, Devoluciones y Cancelaciones" [color: #F6E1ED] {
+  Note: '6 tablas; registros: 0'
   tb_shipments
   tb_returns
   tb_refunds
@@ -373,5 +402,6 @@ TableGroup "Envíos, Devoluciones y Cancelaciones" [color: #F6E1ED] {
 }
 
 TableGroup "Auditoría y Bitácora" [color: #E9E1FF] {
+  Note: '1 tabla; registros: 44,610'
   tb_logs
 }

@@ -25,6 +25,39 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 **Integridad de extracción:** 25 tablas físicas y 34 cláusulas `FOREIGN KEY` extraídas.
 
+## Resumen Volumétrico y Estado de Población de Datos
+
+Conteos calculados a partir de las tuplas de cada sentencia `INSERT INTO` del respaldo. Las tablas sin sentencias de inserción se reportan con cero filas.
+
+| # | Nombre de la Tabla | Módulo | Registros Poblados | Porcentaje del Total | Observaciones / Regla de Negocio Aplicada |
+|---:|---|---|---:|---:|---|
+| 1 | `tb_users` | 1. Usuarios y Seguridad | 7,510 | 8.43% | Cuentas cargadas como entidades de identidad; el estado activo/inactivo se conserva por fila. |
+| 2 | `tb_people` | 1. Usuarios y Seguridad | 7,502 | 8.42% | Datos personales asociados a cuentas; la carga mantiene la relación definida por sus claves. |
+| 3 | `tb_user_addresses` | 1. Usuarios y Seguridad | 0 | 0.00% | Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla. |
+| 4 | `tbd_address_components` | 1. Usuarios y Seguridad | 0 | 0.00% | Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla. |
+| 5 | `tbd_user_payment_methods` | 1. Usuarios y Seguridad | 0 | 0.00% | Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla. |
+| 6 | `tbd_users_wishlist_products` | 1. Usuarios y Seguridad | 0 | 0.00% | Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla. |
+| 7 | `tb_products` | 2. Catálogo y Productos | 7,007 | 7.87% | Catálogo de productos poblado con sus atributos comerciales. |
+| 8 | `tbc_categories` | 2. Catálogo y Productos | 100 | 0.11% | Catálogo de 100 categorías, con jerarquía/autorreferencia definida por el DDL. |
+| 9 | `tbd_products_categorias` | 2. Catálogo y Productos | 15,348 | 17.23% | Relaciones producto-categoría cargadas para clasificar el catálogo. |
+| 10 | `tbd_products_users_providers` | 2. Catálogo y Productos | 7,007 | 7.87% | Ofertas producto-proveedor cargadas para asociar inventario y proveedor. |
+| 11 | `tbc_payment_methods_types` | 2. Catálogo y Productos | 0 | 0.00% | Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla. |
+| 12 | `tb_buyer_orders` | 3. Órdenes y Pagos | 0 | 0.00% | Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla. |
+| 13 | `tb_carts` | 3. Órdenes y Pagos | 0 | 0.00% | Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla. |
+| 14 | `tb_payment_methods` | 3. Órdenes y Pagos | 0 | 0.00% | Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla. |
+| 15 | `tb_payment_transaction` | 3. Órdenes y Pagos | 0 | 0.00% | Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla. |
+| 16 | `tb_payments` | 3. Órdenes y Pagos | 0 | 0.00% | Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla. |
+| 17 | `tbd_carts_items` | 3. Órdenes y Pagos | 0 | 0.00% | Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla. |
+| 18 | `tbd_order_items` | 3. Órdenes y Pagos | 0 | 0.00% | Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla. |
+| 19 | `tb_shipments` | 4. Envíos, Devoluciones y Cancelaciones | 0 | 0.00% | Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla. |
+| 20 | `tb_returns` | 4. Envíos, Devoluciones y Cancelaciones | 0 | 0.00% | Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla. |
+| 21 | `tb_refunds` | 4. Envíos, Devoluciones y Cancelaciones | 0 | 0.00% | Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla. |
+| 22 | `tb_order_cancellations` | 4. Envíos, Devoluciones y Cancelaciones | 0 | 0.00% | Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla. |
+| 23 | `tbd_return_items` | 4. Envíos, Devoluciones y Cancelaciones | 0 | 0.00% | Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla. |
+| 24 | `tbd_cancellation_items` | 4. Envíos, Devoluciones y Cancelaciones | 0 | 0.00% | Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla. |
+| 25 | `tb_logs` | 5. Auditoría y Bitácora | 44,610 | 50.08% | Bitácora con 44,610 eventos; conserva operaciones de auditoría registradas en el respaldo. |
+|  | **Total General de Registros** | **25 tablas** | **89,084** | **100.00%** | Conteo exacto de tuplas INSERT. |
+
 ## Clasificación por módulos funcionales
 
 ### Usuarios y Seguridad
@@ -51,13 +84,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tb_buyer_orders`
 
+- **Nombre:** `tb_buyer_orders`
 - **Módulo:** Órdenes y Pagos
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 0 registros (Tabla estructural lista para operación)
 - **Descripción funcional:** Órdenes de compra, importes y estado de cumplimiento.
 - **Triggers asociados:** `trg_tb_buyer_orders_after_insert`, `trg_tb_buyer_orders_after_update`, `trg_tb_buyer_orders_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `ID` | `int unsigned` | PK, NN, UN, AI | — | — | Identificador primario de la fila. |
 | 2 | `seller_ID` | `int` | FK, NN | — | tb_buyer_orders_ibfk_1: tb_users.ID (regla no declarada (MySQL: RESTRICT/NO ACTION)) | Identificador del vendedor. |
@@ -77,13 +113,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tb_carts`
 
+- **Nombre:** `tb_carts`
 - **Módulo:** Órdenes y Pagos
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 0 registros (Tabla estructural lista para operación)
 - **Descripción funcional:** Carritos de compra asociados a usuarios.
 - **Triggers asociados:** `trg_tb_carts_after_insert`, `trg_tb_carts_after_update`, `trg_tb_carts_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `ID` | `int unsigned` | PK, NN, UN, AI | — | — | Identificador primario de la fila. |
 | 2 | `user_ID` | `int` | FK, UQ, NN | — | tb_carts_ibfk_1: tb_users.ID (regla no declarada (MySQL: RESTRICT/NO ACTION)) | Identificador de usuario asociado. |
@@ -98,13 +137,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tb_logs`
 
+- **Nombre:** `tb_logs`
 - **Módulo:** Auditoría y Bitácora
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 44,610 registros
 - **Descripción funcional:** Bitácora de operaciones, usuario, fecha y descripción para auditoría.
 - **Triggers asociados:** ninguno.
 - **Vistas asociadas:** `vw_trazabilidad_address_components`, `vw_trazabilidad_buyer_orders`, `vw_trazabilidad_cancellation_items`, `vw_trazabilidad_carts`, `vw_trazabilidad_carts_items`, `vw_trazabilidad_categories`, `vw_trazabilidad_order_cancellations`, `vw_trazabilidad_order_items`, `vw_trazabilidad_payment_methods`, `vw_trazabilidad_payment_methods_types`, `vw_trazabilidad_payment_transaction`, `vw_trazabilidad_payments`, `vw_trazabilidad_people`, `vw_trazabilidad_productos`, `vw_trazabilidad_products_categorias`, `vw_trazabilidad_products_users_providers`, `vw_trazabilidad_refunds`, `vw_trazabilidad_return_items`, `vw_trazabilidad_returns`, `vw_trazabilidad_shipments`, `vw_trazabilidad_user_addresses`, `vw_trazabilidad_user_payment_methods`, `vw_trazabilidad_users_wishlist_products`, `vw_trazabilidad_usuarios`.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `ID` | `int` | PK, NN, AI | — | — | Identificador primario de la fila. |
 | 2 | `table_name` | `varchar(80)` | NN | — | — | Nombre de la tabla afectada. |
@@ -119,13 +161,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tb_order_cancellations`
 
+- **Nombre:** `tb_order_cancellations`
 - **Módulo:** Envíos, Devoluciones y Cancelaciones
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 0 registros (Tabla estructural lista para operación)
 - **Descripción funcional:** Cancelaciones solicitadas para órdenes.
 - **Triggers asociados:** `trg_tb_order_cancellations_after_insert`, `trg_tb_order_cancellations_after_update`, `trg_tb_order_cancellations_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `ID` | `int unsigned` | PK, NN, UN, AI | — | — | Identificador primario de la fila. |
 | 2 | `order_ID` | `int unsigned` | FK, NN, UN | — | fk_order_cancellations_order: tb_buyer_orders.ID (ON DELETE RESTRICT; ON UPDATE CASCADE) | Campo order_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación. |
@@ -143,13 +188,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tb_payment_methods`
 
+- **Nombre:** `tb_payment_methods`
 - **Módulo:** Órdenes y Pagos
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 0 registros (Tabla estructural lista para operación)
 - **Descripción funcional:** Métodos de pago registrados por usuarios.
 - **Triggers asociados:** `trg_tb_payment_methods_after_insert`, `trg_tb_payment_methods_after_update`, `trg_tb_payment_methods_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `ID` | `int unsigned` | PK, NN, UN, AI | — | — | Identificador primario de la fila. |
 | 2 | `user_ID` | `int` | FK, NN | — | fk_payment_methods_user: tb_users.ID (ON DELETE RESTRICT; ON UPDATE CASCADE) | Identificador de usuario asociado. |
@@ -168,13 +216,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tb_payment_transaction`
 
+- **Nombre:** `tb_payment_transaction`
 - **Módulo:** Órdenes y Pagos
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 0 registros (Tabla estructural lista para operación)
 - **Descripción funcional:** Transacciones enviadas al procesador de pagos.
 - **Triggers asociados:** `trg_tb_payment_transaction_after_insert`, `trg_tb_payment_transaction_after_update`, `trg_tb_payment_transaction_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `ID` | `int unsigned` | PK, NN, UN, AI | — | — | Identificador primario de la fila. |
 | 2 | `payment_ID` | `int unsigned` | FK, NN, UN | — | fk_payment_transaction_payment: tb_payments.ID (ON DELETE RESTRICT; ON UPDATE CASCADE) | Campo payment_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación. |
@@ -193,13 +244,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tb_payments`
 
+- **Nombre:** `tb_payments`
 - **Módulo:** Órdenes y Pagos
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 0 registros (Tabla estructural lista para operación)
 - **Descripción funcional:** Pagos aplicados a órdenes con un método asociado.
 - **Triggers asociados:** `trg_tb_payments_after_insert`, `trg_tb_payments_after_update`, `trg_tb_payments_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `ID` | `int unsigned` | PK, NN, UN, AI | — | — | Identificador primario de la fila. |
 | 2 | `order_ID` | `int unsigned` | FK, NN, UN | — | fk_payments_order: tb_buyer_orders.ID (ON DELETE RESTRICT; ON UPDATE CASCADE) | Campo order_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación. |
@@ -220,13 +274,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tb_people`
 
+- **Nombre:** `tb_people`
 - **Módulo:** Usuarios y Seguridad
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 7,502 registros
 - **Descripción funcional:** Datos personales asociados a una cuenta.
 - **Triggers asociados:** `trg_tb_people_after_insert`, `trg_tb_people_after_update`, `trg_tb_people_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `person_ID` | `bigint unsigned` | PK, NN, UN, AI | — | — | Campo person_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación. |
 | 2 | `user_ID` | `int` | FK, UQ | NULL | fk_people_users: tb_users.ID (regla no declarada (MySQL: RESTRICT/NO ACTION)) | Identificador de usuario asociado. |
@@ -248,13 +305,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tb_products`
 
+- **Nombre:** `tb_products`
 - **Módulo:** Catálogo y Productos
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 7,007 registros
 - **Descripción funcional:** Catálogo de productos, precios, existencias y estado.
 - **Triggers asociados:** `trg_tb_products_after_insert`, `trg_tb_products_after_update`, `trg_tb_products_after_delete`.
 - **Vistas asociadas:** `vw_total_products_by_category`.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `ID` | `int unsigned` | PK, NN, UN, AI | — | — | Identificador primario de la fila. |
 | 2 | `SKU` | `varchar(50)` | UQ, NN | — | — | Campo SKU; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación. |
@@ -272,13 +332,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tb_refunds`
 
+- **Nombre:** `tb_refunds`
 - **Módulo:** Envíos, Devoluciones y Cancelaciones
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 0 registros (Tabla estructural lista para operación)
 - **Descripción funcional:** Reembolsos vinculados con órdenes.
 - **Triggers asociados:** `trg_tb_refunds_after_insert`, `trg_tb_refunds_after_update`, `trg_tb_refunds_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `ID` | `int unsigned` | PK, NN, UN, AI | — | — | Identificador primario de la fila. |
 | 2 | `order_ID` | `int unsigned` | FK, NN, UN | — | fk_refunds_order: tb_buyer_orders.ID (ON DELETE RESTRICT; ON UPDATE CASCADE) | Campo order_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación. |
@@ -297,13 +360,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tb_returns`
 
+- **Nombre:** `tb_returns`
 - **Módulo:** Envíos, Devoluciones y Cancelaciones
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 0 registros (Tabla estructural lista para operación)
 - **Descripción funcional:** Solicitudes de devolución asociadas a órdenes.
 - **Triggers asociados:** `trg_tb_returns_after_insert`, `trg_tb_returns_after_update`, `trg_tb_returns_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `ID` | `int unsigned` | PK, NN, UN, AI | — | — | Identificador primario de la fila. |
 | 2 | `order_ID` | `int unsigned` | FK, NN, UN | — | fk_returns_order: tb_buyer_orders.ID (ON DELETE RESTRICT; ON UPDATE CASCADE) | Campo order_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación. |
@@ -321,13 +387,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tb_shipments`
 
+- **Nombre:** `tb_shipments`
 - **Módulo:** Envíos, Devoluciones y Cancelaciones
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 0 registros (Tabla estructural lista para operación)
 - **Descripción funcional:** Envíos de órdenes y dirección de entrega.
 - **Triggers asociados:** `trg_tb_shipments_after_insert`, `trg_tb_shipments_after_update`, `trg_tb_shipments_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `ID` | `int unsigned` | PK, NN, UN, AI | — | — | Identificador primario de la fila. |
 | 2 | `order_ID` | `int unsigned` | FK, NN, UN | — | fk_shipments_order: tb_buyer_orders.ID (ON DELETE RESTRICT; ON UPDATE CASCADE) | Campo order_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación. |
@@ -349,13 +418,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tb_user_addresses`
 
+- **Nombre:** `tb_user_addresses`
 - **Módulo:** Usuarios y Seguridad
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 0 registros (Tabla estructural lista para operación)
 - **Descripción funcional:** Direcciones de entrega vinculadas a usuarios.
 - **Triggers asociados:** `trg_tb_user_addresses_after_insert`, `trg_tb_user_addresses_after_update`, `trg_tb_user_addresses_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `ID` | `bigint unsigned` | PK, NN, UN, AI | — | — | Identificador primario de la fila. |
 | 2 | `user_ID` | `int` | FK, NN | — | fk_addresses_users: tb_users.ID (regla no declarada (MySQL: RESTRICT/NO ACTION)) | Identificador de usuario asociado. |
@@ -380,13 +452,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tb_users`
 
+- **Nombre:** `tb_users`
 - **Módulo:** Usuarios y Seguridad
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 7,510 registros
 - **Descripción funcional:** Cuentas, credenciales y estado de usuario.
 - **Triggers asociados:** `trg_tb_users_after_insert`, `trg_tb_users_after_update`, `trg_tb_users_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `ID` | `int` | PK, NN, AI | — | — | Identificador primario de la fila. |
 | 2 | `email` | `varchar(100)` | UQ, NN | — | — | Correo de acceso/contacto. |
@@ -404,13 +479,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tbc_categories`
 
+- **Nombre:** `tbc_categories`
 - **Módulo:** Catálogo y Productos
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 100 registros
 - **Descripción funcional:** Catálogo jerárquico de categorías con autorreferencia.
 - **Triggers asociados:** `trg_tbc_categories_after_insert`, `trg_tbc_categories_after_update`, `trg_tbc_categories_after_delete`.
 - **Vistas asociadas:** `vw_total_products_by_category`.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `ID` | `int unsigned` | PK, NN, UN, AI | — | — | Identificador primario de la fila. |
 | 2 | `name` | `varchar(120)` | UQ, NN | — | — | Nombre visible de la entidad. |
@@ -428,13 +506,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tbc_payment_methods_types`
 
+- **Nombre:** `tbc_payment_methods_types`
 - **Módulo:** Catálogo y Productos
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 0 registros (Tabla estructural lista para operación)
 - **Descripción funcional:** Catálogo de tipos de método de pago.
 - **Triggers asociados:** `trg_tbc_payment_methods_types_after_insert`, `trg_tbc_payment_methods_types_after_update`, `trg_tbc_payment_methods_types_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `ID` | `int unsigned` | PK, NN, UN, AI | — | — | Identificador primario de la fila. |
 | 2 | `code` | `varchar(30)` | NN | — | — | Campo code; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación. |
@@ -448,13 +529,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tbd_address_components`
 
+- **Nombre:** `tbd_address_components`
 - **Módulo:** Usuarios y Seguridad
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 0 registros (Tabla estructural lista para operación)
 - **Descripción funcional:** Componentes jerárquicos de direcciones y relación padre-hijo.
 - **Triggers asociados:** `trg_tbd_address_components_after_insert`, `trg_tbd_address_components_after_update`, `trg_tbd_address_components_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `ID` | `bigint unsigned` | PK, NN, UN, AI | — | — | Identificador primario de la fila. |
 | 2 | `address_ID` | `bigint unsigned` | FK, UQ, NN, UN | — | fk_component_address: tb_user_addresses.ID (ON DELETE RESTRICT); fk_component_parent: tbd_address_components.address_ID (ON DELETE RESTRICT) | Campo address_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación. |
@@ -474,13 +558,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tbd_cancellation_items`
 
+- **Nombre:** `tbd_cancellation_items`
 - **Módulo:** Envíos, Devoluciones y Cancelaciones
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 0 registros (Tabla estructural lista para operación)
 - **Descripción funcional:** Productos incluidos en cancelaciones.
 - **Triggers asociados:** `trg_tbd_cancellation_items_after_insert`, `trg_tbd_cancellation_items_after_update`, `trg_tbd_cancellation_items_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `cancellation_ID` | `int unsigned` | PK, FK, NN, UN | — | fk_cancellation_items_cancellation: tb_order_cancellations.ID (ON DELETE CASCADE; ON UPDATE CASCADE) | Campo cancellation_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación. |
 | 2 | `product_ID` | `int unsigned` | PK, FK, NN, UN | — | fk_cancellation_items_product: tb_products.ID (ON DELETE RESTRICT; ON UPDATE CASCADE) | Identificador de producto asociado. |
@@ -498,13 +585,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tbd_carts_items`
 
+- **Nombre:** `tbd_carts_items`
 - **Módulo:** Órdenes y Pagos
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 0 registros (Tabla estructural lista para operación)
 - **Descripción funcional:** Renglones de producto/proveedor dentro de carritos.
 - **Triggers asociados:** `trg_tbd_carts_items_after_insert`, `trg_tbd_carts_items_after_update`, `trg_tbd_carts_items_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `cart_ID` | `int unsigned` | PK, FK, NN, UN | — | tbd_carts_items_ibfk_1: tb_carts.ID (regla no declarada (MySQL: RESTRICT/NO ACTION)) | Campo cart_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación. |
 | 2 | `provider_ID` | `int` | PK, FK, NN | — | tbd_carts_items_ibfk_2: tbd_products_users_providers.user_ID (regla no declarada (MySQL: RESTRICT/NO ACTION)) | Campo provider_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación. |
@@ -523,13 +613,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tbd_order_items`
 
+- **Nombre:** `tbd_order_items`
 - **Módulo:** Órdenes y Pagos
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 0 registros (Tabla estructural lista para operación)
 - **Descripción funcional:** Renglones de producto/proveedor dentro de órdenes.
 - **Triggers asociados:** `trg_tbd_order_items_after_insert`, `trg_tbd_order_items_after_update`, `trg_tbd_order_items_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `ID` | `int unsigned` | PK, NN, UN, AI | — | — | Identificador primario de la fila. |
 | 2 | `seller_order_ID` | `int unsigned` | FK, NN, UN | — | tbd_order_items_ibfk_1: tb_buyer_orders.ID (regla no declarada (MySQL: RESTRICT/NO ACTION)) | Campo seller_order_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación. |
@@ -554,13 +647,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tbd_products_categorias`
 
+- **Nombre:** `tbd_products_categorias`
 - **Módulo:** Catálogo y Productos
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 15,348 registros
 - **Descripción funcional:** Asociación de productos con categorías.
 - **Triggers asociados:** `trg_tbd_products_categorias_after_insert`, `trg_tbd_products_categorias_after_update`, `trg_tbd_products_categorias_after_delete`.
 - **Vistas asociadas:** `vw_total_products_by_category`.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `product_ID` | `int unsigned` | PK, FK, NN, UN | — | fk_product1: tb_products.ID (regla no declarada (MySQL: RESTRICT/NO ACTION)) | Identificador de producto asociado. |
 | 2 | `category_ID` | `int unsigned` | PK, FK, NN, UN | — | fk_category1: tbc_categories.ID (regla no declarada (MySQL: RESTRICT/NO ACTION)) | Identificador de categoría asociada. |
@@ -577,13 +673,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tbd_products_users_providers`
 
+- **Nombre:** `tbd_products_users_providers`
 - **Módulo:** Catálogo y Productos
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 7,007 registros
 - **Descripción funcional:** Ofertas de productos por proveedores/vendedores.
 - **Triggers asociados:** `trg_tbd_products_users_providers_after_insert`, `trg_tbd_products_users_providers_after_update`, `trg_tbd_products_users_providers_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `user_ID` | `int` | PK, FK, NN | — | fk_user1: tb_users.ID (regla no declarada (MySQL: RESTRICT/NO ACTION)) | Identificador de usuario asociado. |
 | 2 | `product_ID` | `int unsigned` | PK, FK, NN, UN | — | fk_products2: tb_products.ID (regla no declarada (MySQL: RESTRICT/NO ACTION)) | Identificador de producto asociado. |
@@ -601,13 +700,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tbd_return_items`
 
+- **Nombre:** `tbd_return_items`
 - **Módulo:** Envíos, Devoluciones y Cancelaciones
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 0 registros (Tabla estructural lista para operación)
 - **Descripción funcional:** Productos incluidos en solicitudes de devolución.
 - **Triggers asociados:** `trg_tbd_return_items_after_insert`, `trg_tbd_return_items_after_update`, `trg_tbd_return_items_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `return_ID` | `int unsigned` | PK, FK, NN, UN | — | fk_return_items_return: tb_returns.ID (ON DELETE CASCADE; ON UPDATE CASCADE) | Campo return_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación. |
 | 2 | `product_ID` | `int unsigned` | PK, FK, NN, UN | — | fk_return_items_product: tb_products.ID (ON DELETE RESTRICT; ON UPDATE CASCADE) | Identificador de producto asociado. |
@@ -625,13 +727,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tbd_user_payment_methods`
 
+- **Nombre:** `tbd_user_payment_methods`
 - **Módulo:** Usuarios y Seguridad
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 0 registros (Tabla estructural lista para operación)
 - **Descripción funcional:** Métodos de pago asociados a usuarios.
 - **Triggers asociados:** `trg_tbd_user_payment_methods_after_insert`, `trg_tbd_user_payment_methods_after_update`, `trg_tbd_user_payment_methods_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `ID` | `bigint unsigned` | PK, NN, UN, AI | — | — | Identificador primario de la fila. |
 | 2 | `user_ID` | `int` | FK, NN | — | fk_user_payment_user: tb_users.ID (regla no declarada (MySQL: RESTRICT/NO ACTION)) | Identificador de usuario asociado. |
@@ -655,13 +760,16 @@ El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, 
 
 ### `tbd_users_wishlist_products`
 
+- **Nombre:** `tbd_users_wishlist_products`
 - **Módulo:** Usuarios y Seguridad
-- **Motor/cotejamiento:** InnoDB / utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Motor:** InnoDB
+- **Cotejamiento:** utf8mb4 (`utf8mb4_0900_ai_ci`, según DDL).
+- **Registros Actuales:** 0 registros (Tabla estructural lista para operación)
 - **Descripción funcional:** Productos guardados por usuarios en listas de deseos.
 - **Triggers asociados:** `trg_tbd_users_wishlist_products_after_insert`, `trg_tbd_users_wishlist_products_after_update`, `trg_tbd_users_wishlist_products_after_delete`.
 - **Vistas asociadas:** ninguna.
 
-| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional y Reglas de Negocio |
+| # | Nombre de Columna | Tipo de Dato y Longitud | Restricciones (PK, FK, UQ, NN, UN, AI) | Valor por Defecto | Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE) | Descripción Funcional |
 |---:|---|---|---|---|---|---|
 | 1 | `user_ID` | `int` | PK, FK, NN | — | fk_user2: tb_users.ID (regla no declarada (MySQL: RESTRICT/NO ACTION)) | Identificador de usuario asociado. |
 | 2 | `product_ID` | `int unsigned` | PK, FK, NN, UN | — | fk_products3: tb_products.ID (regla no declarada (MySQL: RESTRICT/NO ACTION)) | Identificador de producto asociado. |
