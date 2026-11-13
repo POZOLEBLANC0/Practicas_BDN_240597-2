@@ -1,0 +1,927 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Diccionario de datos · db_test_7b</title><style>
+:root{color-scheme:dark;--red:#CC0000;--blue:#79ADFF;--night:#000000;--panel:#000000;--line:#334155;--text:#FFFFFF;--muted:#CBD5E1}*{box-sizing:border-box}body{margin:0;background:var(--night);color:var(--text);font:15px/1.55 system-ui,Segoe UI,Arial,sans-serif}header{position:sticky;top:0;z-index:5;background:linear-gradient(110deg,#CC0000,#79ADFF);padding:18px clamp(16px,4vw,48px);box-shadow:0 5px 24px #0009}h1{margin:0 0 12px;font-size:clamp(22px,3vw,34px)}.controls{display:flex;flex-wrap:wrap;gap:10px}.controls input,.controls select,.controls button{border:1px solid #64748b;border-radius:8px;padding:10px 12px;background:#0B1120;color:#fff;font:inherit}.controls input{flex:1;min-width:250px}.controls button{background:#CC0000;font-weight:750;cursor:pointer}.controls button:hover{background:#FF0000}.count{align-self:center;font-weight:800;background:#0B1120;border-radius:99px;padding:8px 13px}main{max-width:1600px;margin:auto;padding:24px clamp(12px,3vw,36px)}h2,h3{scroll-margin-top:140px}h2{margin:38px 0 14px;padding:10px 14px;border-left:6px solid #FF0000;background:linear-gradient(90deg,#CC0000,#79ADFF33);font-size:24px}h3{margin:0 0 12px;color:#fff;background:#CC0000;border:1px solid #FF0000;border-radius:8px;padding:11px 14px}.table-card{margin:18px 0 28px;padding:16px;background:#0B1120;border:1px solid #79ADFF;border-radius:12px;box-shadow:0 8px 30px #0006}.table-card ul{padding-left:24px}.table-wrap{overflow:auto;margin:14px 0 22px;border:1px solid var(--line);border-radius:8px}table{width:100%;border-collapse:collapse;background:#000000;font-size:13px}th,td{padding:8px 10px;border:1px solid #334155;text-align:left;vertical-align:top;overflow-wrap:anywhere}th{position:sticky;top:0;background:#172544;color:#fff;font-weight:800}tbody tr:nth-child(odd){background:#000000}tbody tr:nth-child(even){background:#121212}code{color:#79ADFF;background:#1e293b;padding:1px 4px;border-radius:4px}a{color:#79ADFF}p{margin:10px 0;color:#E2E8F0}hr{border:0;border-top:1px solid #334155;margin:28px 0}.empty{display:none;padding:24px;text-align:center;color:#CBD5E1}
+@media print{ :root{color-scheme:light}body{background:white!important;color:#111!important;font-size:10pt}header{position:static;background:white!important;color:#111;box-shadow:none;padding:0 0 12px}.controls{display:none}main{max-width:none;padding:0}h1,h2,h3{color:#111!important;background:#eee!important;border-color:#555!important;break-after:avoid}.table-card{background:white!important;color:#111!important;box-shadow:none;border:1px solid #888;break-inside:avoid-page}p,td,th,li{color:#111!important}table{font-size:8pt;background:white!important}th{position:static;background:#ddd!important;color:#111!important}tbody tr,tbody tr:nth-child(odd),tbody tr:nth-child(even){background:white!important}td,th{border:1px solid #888!important}code{background:#eee;color:#111}a{color:#111;text-decoration:none}.table-wrap{overflow:visible;border:0}tr{break-inside:avoid}h2{break-before:page}}
+
+:root{color-scheme:dark;--red:#CC0000;--red-edge:#FF0000;--black:#000000;--black-row:#121212;--bio:#79ADFF;--white:#FFFFFF}body{background:#000000;color:#FFFFFF}header{background:linear-gradient(105deg,#CC0000,#0D0D0D 72%);border-bottom:2px solid #FF0000}.controls input,.controls select,.controls button{background:#0D0D0D;color:#FFFFFF;border-color:#FF0000}.controls button{background:#CC0000}.controls button.quiet{background:#0D0D0D;color:#79ADFF;border-color:#79ADFF;font-size:13px}.controls button:hover{background:#FF0000}.count,.table-count{color:#79ADFF}.table-card{display:block;margin:12px 0;padding:0;background:#000000;border:1px solid #FF0000;border-radius:8px;box-shadow:none;overflow:hidden}.table-card>summary{display:flex;align-items:center;gap:14px;list-style:none;cursor:pointer;background:#CC0000;border:1px solid #FF0000;padding:12px 16px;color:#FFFFFF;font-weight:800}.table-card>summary::-webkit-details-marker{display:none}.table-name{color:#FFFFFF;min-width:220px}.table-module{font-weight:500;color:#FFFFFF;opacity:.92}.table-count{margin-left:auto;font-weight:900;white-space:nowrap}.chevron{color:#FFFFFF;transition:transform .15s}.table-card[open]>.table-card>summary .chevron,.table-card[open]>summary .chevron{transform:rotate(180deg)}.ficha-content{padding:14px;background:#000000}.ficha-content h3{background:#0D0D0D;border-color:#FF0000;color:#FFFFFF}.table-wrap{border-color:#FF0000}table{background:#000000;color:#FFFFFF}th{background:#CC0000;color:#FFFFFF;border-color:#FF0000}tbody tr:nth-child(odd){background:#000000;color:#FFFFFF}tbody tr:nth-child(even){background:#121212;color:#FFFFFF}td{color:#FFFFFF;border-color:#333}code{background:#0D0D0D;color:#79ADFF}a{color:#79ADFF}.table-card[hidden]{display:none!important}
+@media print{body{background:#fff!important}.controls{display:none!important}.table-card{break-inside:auto;background:#fff!important;border:1px solid #555!important;overflow:visible}.table-card>summary{display:list-item!important;background:#eee!important;color:#111!important;border-color:#555!important;break-after:avoid}.table-name,.table-module,.chevron,.table-count{color:#111!important}.table-card>.ficha-content,.table-card:not([open])>.ficha-content{display:block!important;background:#fff!important}.table-card[hidden]{display:block!important}.ficha-content{padding:6px}.ficha-content h3{background:#eee!important;color:#111!important;border-color:#555!important}table,tbody tr,tbody tr:nth-child(odd),tbody tr:nth-child(even){background:#fff!important;color:#111!important}th{background:#ddd!important;color:#111!important}td,th{color:#111!important;border-color:#777!important}.table-wrap{overflow:visible}h2{break-before:page}}
+</style></head><body><header><h1>Miles Morales · Diccionario de Datos · db_test_7b</h1><div class="controls"><input id="search" type="search" placeholder="Buscar tabla, columna, tipo o restricción…" aria-label="Buscar en el diccionario"><select id="module"><option value="">Todos los módulos</option><option value="Usuarios y Seguridad">1. Usuarios y Seguridad</option><option value="Catálogo y Productos">2. Catálogo y Productos</option><option value="Órdenes y Pagos">3. Órdenes y Pagos</option><option value="Envíos, Devoluciones y Cancelaciones">4. Envíos, Devoluciones y Cancelaciones</option><option value="Auditoría y Bitácora">5. Auditoría y Bitácora</option></select><button id="toggleAll" class="quiet" type="button">Expandir / Contraer todas</button><button onclick="window.print()">Imprimir / Guardar PDF</button><span class="count">25 tablas · 89,084 registros</span></div></header><main id="content"><p># Diccionario de Datos — db_test_7b</p>
+<p><strong>Motor:</strong> MySQL 8.0+ / InnoDB · <strong>Juego de caracteres:</strong> utf8mb4 · <strong>Fuente:</strong> <code>db_test_7b1211.sql</code></p>
+<h2>Índice general</h2>
+<p>1. <a href="#resumen-ejecutivo-e-inventario">Resumen ejecutivo e inventario</a></p>
+<p>2. <a href="#clasificación-por-módulos-funcionales">Clasificación por módulos</a></p>
+<p>3. <a href="#fichas-técnicas-de-tablas">Fichas de tablas</a></p>
+<p>4. <a href="#catálogo-de-automatización-y-vistas">Vistas y automatización</a></p>
+<h2>Resumen ejecutivo e inventario</h2>
+<p>El esquema modela comercio electrónico: identidad, catálogo, órdenes, pagos, logística y trazabilidad. El siguiente inventario se obtuvo del DDL; los textos funcionales no definidos mediante comentarios en el SQL se identifican como interpretación basada en nombres y restricciones.</p>
+<div class="table-wrap"><table><thead><tr><th>Objeto</th><th>Cantidad</th></tr></thead><tbody>
+<tr><td>Tablas</td><td>25</td></tr>
+<tr><td>Llaves foráneas</td><td>34</td></tr>
+<tr><td>Vistas</td><td>25</td></tr>
+<tr><td>Triggers</td><td>72</td></tr>
+<tr><td>Funciones</td><td>6</td></tr>
+<tr><td>Procedimientos</td><td>5</td></tr>
+<tr><td>Eventos</td><td>2</td></tr>
+</tbody></table></div>
+<p><strong>Integridad de extracción:</strong> 25 tablas físicas y 34 cláusulas <code>FOREIGN KEY</code> extraídas.</p>
+<h2>Resumen Volumétrico y Estado de Población de Datos</h2>
+<p>Conteos calculados a partir de las tuplas de cada sentencia <code>INSERT INTO</code> del respaldo. Las tablas sin sentencias de inserción se reportan con cero filas.</p>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de la Tabla</th><th>Módulo</th><th>Registros Poblados</th><th>Porcentaje del Total</th><th>Observaciones / Regla de Negocio Aplicada</th></tr></thead><tbody>
+<tr><td>1</td><td><code>tb_users</code></td><td>1. Usuarios y Seguridad</td><td>7,510</td><td>8.43%</td><td>Cuentas cargadas como entidades de identidad; el estado activo/inactivo se conserva por fila.</td></tr>
+<tr><td>2</td><td><code>tb_people</code></td><td>1. Usuarios y Seguridad</td><td>7,502</td><td>8.42%</td><td>Datos personales asociados a cuentas; la carga mantiene la relación definida por sus claves.</td></tr>
+<tr><td>3</td><td><code>tb_user_addresses</code></td><td>1. Usuarios y Seguridad</td><td>0</td><td>0.00%</td><td>Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla.</td></tr>
+<tr><td>4</td><td><code>tbd_address_components</code></td><td>1. Usuarios y Seguridad</td><td>0</td><td>0.00%</td><td>Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla.</td></tr>
+<tr><td>5</td><td><code>tbd_user_payment_methods</code></td><td>1. Usuarios y Seguridad</td><td>0</td><td>0.00%</td><td>Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla.</td></tr>
+<tr><td>6</td><td><code>tbd_users_wishlist_products</code></td><td>1. Usuarios y Seguridad</td><td>0</td><td>0.00%</td><td>Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla.</td></tr>
+<tr><td>7</td><td><code>tb_products</code></td><td>2. Catálogo y Productos</td><td>7,007</td><td>7.87%</td><td>Catálogo de productos poblado con sus atributos comerciales.</td></tr>
+<tr><td>8</td><td><code>tbc_categories</code></td><td>2. Catálogo y Productos</td><td>100</td><td>0.11%</td><td>Catálogo de 100 categorías, con jerarquía/autorreferencia definida por el DDL.</td></tr>
+<tr><td>9</td><td><code>tbd_products_categorias</code></td><td>2. Catálogo y Productos</td><td>15,348</td><td>17.23%</td><td>Relaciones producto-categoría cargadas para clasificar el catálogo.</td></tr>
+<tr><td>10</td><td><code>tbd_products_users_providers</code></td><td>2. Catálogo y Productos</td><td>7,007</td><td>7.87%</td><td>Ofertas producto-proveedor cargadas para asociar inventario y proveedor.</td></tr>
+<tr><td>11</td><td><code>tbc_payment_methods_types</code></td><td>2. Catálogo y Productos</td><td>0</td><td>0.00%</td><td>Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla.</td></tr>
+<tr><td>12</td><td><code>tb_buyer_orders</code></td><td>3. Órdenes y Pagos</td><td>0</td><td>0.00%</td><td>Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla.</td></tr>
+<tr><td>13</td><td><code>tb_carts</code></td><td>3. Órdenes y Pagos</td><td>0</td><td>0.00%</td><td>Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla.</td></tr>
+<tr><td>14</td><td><code>tb_payment_methods</code></td><td>3. Órdenes y Pagos</td><td>0</td><td>0.00%</td><td>Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla.</td></tr>
+<tr><td>15</td><td><code>tb_payment_transaction</code></td><td>3. Órdenes y Pagos</td><td>0</td><td>0.00%</td><td>Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla.</td></tr>
+<tr><td>16</td><td><code>tb_payments</code></td><td>3. Órdenes y Pagos</td><td>0</td><td>0.00%</td><td>Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla.</td></tr>
+<tr><td>17</td><td><code>tbd_carts_items</code></td><td>3. Órdenes y Pagos</td><td>0</td><td>0.00%</td><td>Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla.</td></tr>
+<tr><td>18</td><td><code>tbd_order_items</code></td><td>3. Órdenes y Pagos</td><td>0</td><td>0.00%</td><td>Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla.</td></tr>
+<tr><td>19</td><td><code>tb_shipments</code></td><td>4. Envíos, Devoluciones y Cancelaciones</td><td>0</td><td>0.00%</td><td>Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla.</td></tr>
+<tr><td>20</td><td><code>tb_returns</code></td><td>4. Envíos, Devoluciones y Cancelaciones</td><td>0</td><td>0.00%</td><td>Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla.</td></tr>
+<tr><td>21</td><td><code>tb_refunds</code></td><td>4. Envíos, Devoluciones y Cancelaciones</td><td>0</td><td>0.00%</td><td>Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla.</td></tr>
+<tr><td>22</td><td><code>tb_order_cancellations</code></td><td>4. Envíos, Devoluciones y Cancelaciones</td><td>0</td><td>0.00%</td><td>Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla.</td></tr>
+<tr><td>23</td><td><code>tbd_return_items</code></td><td>4. Envíos, Devoluciones y Cancelaciones</td><td>0</td><td>0.00%</td><td>Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla.</td></tr>
+<tr><td>24</td><td><code>tbd_cancellation_items</code></td><td>4. Envíos, Devoluciones y Cancelaciones</td><td>0</td><td>0.00%</td><td>Tabla estructural lista para operación; el respaldo no contiene sentencias INSERT para esta tabla.</td></tr>
+<tr><td>25</td><td><code>tb_logs</code></td><td>5. Auditoría y Bitácora</td><td>44,610</td><td>50.08%</td><td>Bitácora con 44,610 eventos; conserva operaciones de auditoría registradas en el respaldo.</td></tr>
+<tr><td></td><td><strong>Total General de Registros</strong></td><td><strong>25 tablas</strong></td><td><strong>89,084</strong></td><td><strong>100.00%</strong></td><td>Conteo exacto de tuplas INSERT.</td></tr>
+</tbody></table></div>
+<h2>Clasificación por módulos funcionales</h2>
+<h3>Usuarios y Seguridad</h3>
+<p><code>tb_users</code>, <code>tb_people</code>, <code>tb_user_addresses</code>, <code>tbd_address_components</code>, <code>tbd_user_payment_methods</code>, <code>tbd_users_wishlist_products</code></p>
+<h3>Catálogo y Productos</h3>
+<p><code>tb_products</code>, <code>tbc_categories</code>, <code>tbd_products_categorias</code>, <code>tbd_products_users_providers</code>, <code>tbc_payment_methods_types</code></p>
+<h3>Órdenes y Pagos</h3>
+<p><code>tb_buyer_orders</code>, <code>tb_carts</code>, <code>tb_payment_methods</code>, <code>tb_payment_transaction</code>, <code>tb_payments</code>, <code>tbd_carts_items</code>, <code>tbd_order_items</code></p>
+<h3>Envíos, Devoluciones y Cancelaciones</h3>
+<p><code>tb_shipments</code>, <code>tb_returns</code>, <code>tb_refunds</code>, <code>tb_order_cancellations</code>, <code>tbd_return_items</code>, <code>tbd_cancellation_items</code></p>
+<h3>Auditoría y Bitácora</h3>
+<p><code>tb_logs</code></p>
+<h2>Fichas técnicas de tablas</h2>
+<details class="table-card" data-table="tb_buyer_orders" data-module="Órdenes y Pagos" data-count="0"><summary><span class="table-name">tb_buyer_orders</span><span class="table-module">Órdenes y Pagos</span><span class="table-count">0 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tb_buyer_orders</code></li>
+<li><strong>Módulo:</strong> Órdenes y Pagos</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 0 registros (Tabla estructural lista para operación)</li>
+<li><strong>Descripción funcional:</strong> Órdenes de compra, importes y estado de cumplimiento.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tb_buyer_orders_after_insert</code>, <code>trg_tb_buyer_orders_after_update</code>, <code>trg_tb_buyer_orders_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>ID</code></td><td><code>int unsigned</code></td><td>PK, NN, UN, AI</td><td>—</td><td>—</td><td>Identificador primario de la fila.</td></tr>
+<tr><td>2</td><td><code>seller_ID</code></td><td><code>int</code></td><td>FK, NN</td><td>—</td><td>tb_buyer_orders_ibfk_1: tb_users.ID (regla no declarada (MySQL: RESTRICT/NO ACTION))</td><td>Identificador del vendedor.</td></tr>
+<tr><td>3</td><td><code>subtotal</code></td><td><code>decimal(12,2)</code></td><td>NN</td><td>'0.00'</td><td>—</td><td>Campo subtotal; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>4</td><td><code>shipping_cost</code></td><td><code>decimal(12,2)</code></td><td>NN</td><td>'0.00'</td><td>—</td><td>Campo shipping_cost; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>5</td><td><code>fulfillment_status</code></td><td><code>enum('Pending','Accepted','Preparing','Sent','Delivered','Canceled','Returned')</code></td><td>NN</td><td>'Pending'</td><td>—</td><td>Campo fulfillment_status; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>6</td><td><code>status</code></td><td><code>bit(1)</code></td><td>NN</td><td>b'1'</td><td>—</td><td>Indicador de estado/activo según la lógica de la entidad.</td></tr>
+<tr><td>7</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>NN</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>8</td><td><code>last_update</code></td><td><code>datetime</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>ID<code>)</code></li>
+<li><code>KEY </code>seller_ID<code> (</code>seller_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>tb_buyer_orders_ibfk_1<code> FOREIGN KEY (</code>seller_ID<code>) REFERENCES </code>tb_users<code> (</code>ID<code>)</code></li>
+<li><code>CONSTRAINT </code>tb_buyer_orders_chk_1<code> CHECK ((</code>subtotal<code> &gt;= 0))</code></li>
+<li><code>CONSTRAINT </code>tb_buyer_orders_chk_2<code> CHECK ((</code>shipping_cost<code> &gt;= 0))</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tb_carts" data-module="Órdenes y Pagos" data-count="0"><summary><span class="table-name">tb_carts</span><span class="table-module">Órdenes y Pagos</span><span class="table-count">0 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tb_carts</code></li>
+<li><strong>Módulo:</strong> Órdenes y Pagos</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 0 registros (Tabla estructural lista para operación)</li>
+<li><strong>Descripción funcional:</strong> Carritos de compra asociados a usuarios.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tb_carts_after_insert</code>, <code>trg_tb_carts_after_update</code>, <code>trg_tb_carts_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>ID</code></td><td><code>int unsigned</code></td><td>PK, NN, UN, AI</td><td>—</td><td>—</td><td>Identificador primario de la fila.</td></tr>
+<tr><td>2</td><td><code>user_ID</code></td><td><code>int</code></td><td>FK, UQ, NN</td><td>—</td><td>tb_carts_ibfk_1: tb_users.ID (regla no declarada (MySQL: RESTRICT/NO ACTION))</td><td>Identificador de usuario asociado.</td></tr>
+<tr><td>3</td><td><code>status</code></td><td><code>bit(1)</code></td><td>—</td><td>b'1'</td><td>—</td><td>Indicador de estado/activo según la lógica de la entidad.</td></tr>
+<tr><td>4</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>NN</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>5</td><td><code>last_update</code></td><td><code>datetime</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>ID<code>)</code></li>
+<li><code>UNIQUE KEY </code>uk_cart_user<code> (</code>user_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>tb_carts_ibfk_1<code> FOREIGN KEY (</code>user_ID<code>) REFERENCES </code>tb_users<code> (</code>ID<code>)</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tb_logs" data-module="Auditoría y Bitácora" data-count="44610"><summary><span class="table-name">tb_logs</span><span class="table-module">Auditoría y Bitácora</span><span class="table-count">44,610 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tb_logs</code></li>
+<li><strong>Módulo:</strong> Auditoría y Bitácora</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 44,610 registros</li>
+<li><strong>Descripción funcional:</strong> Bitácora de operaciones, usuario, fecha y descripción para auditoría.</li>
+<li><strong>Triggers asociados:</strong> ninguno.</li>
+<li><strong>Vistas asociadas:</strong> <code>vw_trazabilidad_address_components</code>, <code>vw_trazabilidad_buyer_orders</code>, <code>vw_trazabilidad_cancellation_items</code>, <code>vw_trazabilidad_carts</code>, <code>vw_trazabilidad_carts_items</code>, <code>vw_trazabilidad_categories</code>, <code>vw_trazabilidad_order_cancellations</code>, <code>vw_trazabilidad_order_items</code>, <code>vw_trazabilidad_payment_methods</code>, <code>vw_trazabilidad_payment_methods_types</code>, <code>vw_trazabilidad_payment_transaction</code>, <code>vw_trazabilidad_payments</code>, <code>vw_trazabilidad_people</code>, <code>vw_trazabilidad_productos</code>, <code>vw_trazabilidad_products_categorias</code>, <code>vw_trazabilidad_products_users_providers</code>, <code>vw_trazabilidad_refunds</code>, <code>vw_trazabilidad_return_items</code>, <code>vw_trazabilidad_returns</code>, <code>vw_trazabilidad_shipments</code>, <code>vw_trazabilidad_user_addresses</code>, <code>vw_trazabilidad_user_payment_methods</code>, <code>vw_trazabilidad_users_wishlist_products</code>, <code>vw_trazabilidad_usuarios</code>.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>ID</code></td><td><code>int</code></td><td>PK, NN, AI</td><td>—</td><td>—</td><td>Identificador primario de la fila.</td></tr>
+<tr><td>2</td><td><code>table_name</code></td><td><code>varchar(80)</code></td><td>NN</td><td>—</td><td>—</td><td>Nombre de la tabla afectada.</td></tr>
+<tr><td>3</td><td><code>table_operation</code></td><td><code>enum('Create','Read','Update','Delete')</code></td><td>—</td><td>NULL</td><td>—</td><td>Tipo de operación auditada.</td></tr>
+<tr><td>4</td><td><code>db_user</code></td><td><code>varchar(80)</code></td><td>NN</td><td>—</td><td>—</td><td>Usuario de base de datos que ejecutó la operación.</td></tr>
+<tr><td>5</td><td><code>operation_date</code></td><td><code>datetime</code></td><td>NN</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de la operación auditada.</td></tr>
+<tr><td>6</td><td><code>table_description</code></td><td><code>text</code></td><td>NN</td><td>—</td><td>—</td><td>Campo table_description; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>7</td><td><code>operation_status</code></td><td><code>bit(1)</code></td><td>—</td><td>b'1'</td><td>—</td><td>Campo operation_status; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>ID<code>)</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tb_order_cancellations" data-module="Envíos, Devoluciones y Cancelaciones" data-count="0"><summary><span class="table-name">tb_order_cancellations</span><span class="table-module">Envíos, Devoluciones y Cancelaciones</span><span class="table-count">0 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tb_order_cancellations</code></li>
+<li><strong>Módulo:</strong> Envíos, Devoluciones y Cancelaciones</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 0 registros (Tabla estructural lista para operación)</li>
+<li><strong>Descripción funcional:</strong> Cancelaciones solicitadas para órdenes.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tb_order_cancellations_after_insert</code>, <code>trg_tb_order_cancellations_after_update</code>, <code>trg_tb_order_cancellations_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>ID</code></td><td><code>int unsigned</code></td><td>PK, NN, UN, AI</td><td>—</td><td>—</td><td>Identificador primario de la fila.</td></tr>
+<tr><td>2</td><td><code>order_ID</code></td><td><code>int unsigned</code></td><td>FK, NN, UN</td><td>—</td><td>fk_order_cancellations_order: tb_buyer_orders.ID (ON DELETE RESTRICT; ON UPDATE CASCADE)</td><td>Campo order_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>3</td><td><code>reason</code></td><td><code>text</code></td><td>—</td><td>—</td><td>—</td><td>Campo reason; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>4</td><td><code>status</code></td><td><code>bit(1)</code></td><td>—</td><td>NULL</td><td>—</td><td>Indicador de estado/activo según la lógica de la entidad.</td></tr>
+<tr><td>5</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>6</td><td><code>created_at</code></td><td><code>timestamp</code></td><td>—</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Campo created_at; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>7</td><td><code>created_by</code></td><td><code>varchar(100)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo created_by; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>8</td><td><code>last_update</code></td><td><code>timestamp</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>ID<code>)</code></li>
+<li><code>KEY </code>fk_order_cancellations_order<code> (</code>order_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_order_cancellations_order<code> FOREIGN KEY (</code>order_ID<code>) REFERENCES </code>tb_buyer_orders<code> (</code>ID<code>) ON DELETE RESTRICT ON UPDATE CASCADE</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tb_payment_methods" data-module="Órdenes y Pagos" data-count="0"><summary><span class="table-name">tb_payment_methods</span><span class="table-module">Órdenes y Pagos</span><span class="table-count">0 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tb_payment_methods</code></li>
+<li><strong>Módulo:</strong> Órdenes y Pagos</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 0 registros (Tabla estructural lista para operación)</li>
+<li><strong>Descripción funcional:</strong> Métodos de pago registrados por usuarios.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tb_payment_methods_after_insert</code>, <code>trg_tb_payment_methods_after_update</code>, <code>trg_tb_payment_methods_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>ID</code></td><td><code>int unsigned</code></td><td>PK, NN, UN, AI</td><td>—</td><td>—</td><td>Identificador primario de la fila.</td></tr>
+<tr><td>2</td><td><code>user_ID</code></td><td><code>int</code></td><td>FK, NN</td><td>—</td><td>fk_payment_methods_user: tb_users.ID (ON DELETE RESTRICT; ON UPDATE CASCADE)</td><td>Identificador de usuario asociado.</td></tr>
+<tr><td>3</td><td><code>name</code></td><td><code>varchar(50)</code></td><td>—</td><td>NULL</td><td>—</td><td>Nombre visible de la entidad.</td></tr>
+<tr><td>4</td><td><code>description</code></td><td><code>varchar(255)</code></td><td>—</td><td>NULL</td><td>—</td><td>Descripción textual de la entidad.</td></tr>
+<tr><td>5</td><td><code>status</code></td><td><code>bit(1)</code></td><td>—</td><td>NULL</td><td>—</td><td>Indicador de estado/activo según la lógica de la entidad.</td></tr>
+<tr><td>6</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>7</td><td><code>created_at</code></td><td><code>timestamp</code></td><td>—</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Campo created_at; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>8</td><td><code>created_by</code></td><td><code>varchar(100)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo created_by; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>9</td><td><code>last_update</code></td><td><code>timestamp</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>ID<code>)</code></li>
+<li><code>KEY </code>fk_payment_methods_user<code> (</code>user_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_payment_methods_user<code> FOREIGN KEY (</code>user_ID<code>) REFERENCES </code>tb_users<code> (</code>ID<code>) ON DELETE RESTRICT ON UPDATE CASCADE</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tb_payment_transaction" data-module="Órdenes y Pagos" data-count="0"><summary><span class="table-name">tb_payment_transaction</span><span class="table-module">Órdenes y Pagos</span><span class="table-count">0 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tb_payment_transaction</code></li>
+<li><strong>Módulo:</strong> Órdenes y Pagos</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 0 registros (Tabla estructural lista para operación)</li>
+<li><strong>Descripción funcional:</strong> Transacciones enviadas al procesador de pagos.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tb_payment_transaction_after_insert</code>, <code>trg_tb_payment_transaction_after_update</code>, <code>trg_tb_payment_transaction_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>ID</code></td><td><code>int unsigned</code></td><td>PK, NN, UN, AI</td><td>—</td><td>—</td><td>Identificador primario de la fila.</td></tr>
+<tr><td>2</td><td><code>payment_ID</code></td><td><code>int unsigned</code></td><td>FK, NN, UN</td><td>—</td><td>fk_payment_transaction_payment: tb_payments.ID (ON DELETE RESTRICT; ON UPDATE CASCADE)</td><td>Campo payment_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>3</td><td><code>transaction_ref</code></td><td><code>varchar(255)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo transaction_ref; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>4</td><td><code>amount</code></td><td><code>decimal(12,2)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo amount; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>5</td><td><code>status</code></td><td><code>bit(1)</code></td><td>—</td><td>NULL</td><td>—</td><td>Indicador de estado/activo según la lógica de la entidad.</td></tr>
+<tr><td>6</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>7</td><td><code>created_at</code></td><td><code>timestamp</code></td><td>—</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Campo created_at; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>8</td><td><code>created_by</code></td><td><code>varchar(100)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo created_by; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>9</td><td><code>last_update</code></td><td><code>timestamp</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>ID<code>)</code></li>
+<li><code>KEY </code>fk_payment_transaction_payment<code> (</code>payment_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_payment_transaction_payment<code> FOREIGN KEY (</code>payment_ID<code>) REFERENCES </code>tb_payments<code> (</code>ID<code>) ON DELETE RESTRICT ON UPDATE CASCADE</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tb_payments" data-module="Órdenes y Pagos" data-count="0"><summary><span class="table-name">tb_payments</span><span class="table-module">Órdenes y Pagos</span><span class="table-count">0 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tb_payments</code></li>
+<li><strong>Módulo:</strong> Órdenes y Pagos</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 0 registros (Tabla estructural lista para operación)</li>
+<li><strong>Descripción funcional:</strong> Pagos aplicados a órdenes con un método asociado.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tb_payments_after_insert</code>, <code>trg_tb_payments_after_update</code>, <code>trg_tb_payments_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>ID</code></td><td><code>int unsigned</code></td><td>PK, NN, UN, AI</td><td>—</td><td>—</td><td>Identificador primario de la fila.</td></tr>
+<tr><td>2</td><td><code>order_ID</code></td><td><code>int unsigned</code></td><td>FK, NN, UN</td><td>—</td><td>fk_payments_order: tb_buyer_orders.ID (ON DELETE RESTRICT; ON UPDATE CASCADE)</td><td>Campo order_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>3</td><td><code>user_payment_method_ID</code></td><td><code>bigint unsigned</code></td><td>FK, UN</td><td>NULL</td><td>fk_payments_user_payment_method: tbd_user_payment_methods.ID (ON DELETE RESTRICT; ON UPDATE CASCADE)</td><td>Campo user_payment_method_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>4</td><td><code>amount</code></td><td><code>decimal(12,2)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo amount; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>5</td><td><code>status</code></td><td><code>bit(1)</code></td><td>—</td><td>NULL</td><td>—</td><td>Indicador de estado/activo según la lógica de la entidad.</td></tr>
+<tr><td>6</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>7</td><td><code>created_at</code></td><td><code>timestamp</code></td><td>—</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Campo created_at; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>8</td><td><code>created_by</code></td><td><code>varchar(100)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo created_by; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>9</td><td><code>last_update</code></td><td><code>timestamp</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>ID<code>)</code></li>
+<li><code>KEY </code>fk_payments_order<code> (</code>order_ID<code>)</code></li>
+<li><code>KEY </code>fk_payments_user_payment_method<code> (</code>user_payment_method_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_payments_order<code> FOREIGN KEY (</code>order_ID<code>) REFERENCES </code>tb_buyer_orders<code> (</code>ID<code>) ON DELETE RESTRICT ON UPDATE CASCADE</code></li>
+<li><code>CONSTRAINT </code>fk_payments_user_payment_method<code> FOREIGN KEY (</code>user_payment_method_ID<code>) REFERENCES </code>tbd_user_payment_methods<code> (</code>ID<code>) ON DELETE RESTRICT ON UPDATE CASCADE</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tb_people" data-module="Usuarios y Seguridad" data-count="7502"><summary><span class="table-name">tb_people</span><span class="table-module">Usuarios y Seguridad</span><span class="table-count">7,502 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tb_people</code></li>
+<li><strong>Módulo:</strong> Usuarios y Seguridad</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 7,502 registros</li>
+<li><strong>Descripción funcional:</strong> Datos personales asociados a una cuenta.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tb_people_after_insert</code>, <code>trg_tb_people_after_update</code>, <code>trg_tb_people_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>person_ID</code></td><td><code>bigint unsigned</code></td><td>PK, NN, UN, AI</td><td>—</td><td>—</td><td>Campo person_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>2</td><td><code>user_ID</code></td><td><code>int</code></td><td>FK, UQ</td><td>NULL</td><td>fk_people_users: tb_users.ID (regla no declarada (MySQL: RESTRICT/NO ACTION))</td><td>Identificador de usuario asociado.</td></tr>
+<tr><td>3</td><td><code>courtesy_title</code></td><td><code>varchar(20)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo courtesy_title; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>4</td><td><code>given_names</code></td><td><code>varchar(150)</code></td><td>NN</td><td>—</td><td>—</td><td>Campo given_names; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>5</td><td><code>family_names</code></td><td><code>varchar(150)</code></td><td>NN</td><td>—</td><td>—</td><td>Campo family_names; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>6</td><td><code>birth_date</code></td><td><code>date</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo birth_date; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>7</td><td><code>gender</code></td><td><code>enum('Hombre','Mujer','Prefiero no decirlo')</code></td><td>NN</td><td>'Prefiero no decirlo'</td><td>—</td><td>Campo gender; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>8</td><td><code>country_code</code></td><td><code>char(2)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo country_code; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>9</td><td><code>phone</code></td><td><code>varchar(25)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo phone; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>10</td><td><code>status</code></td><td><code>bit(1)</code></td><td>—</td><td>b'1'</td><td>—</td><td>Indicador de estado/activo según la lógica de la entidad.</td></tr>
+<tr><td>11</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>—</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>12</td><td><code>last_update</code></td><td><code>datetime</code></td><td>—</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>person_ID<code>)</code></li>
+<li><code>UNIQUE KEY </code>user_ID<code> (</code>user_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_people_users<code> FOREIGN KEY (</code>user_ID<code>) REFERENCES </code>tb_users<code> (</code>ID<code>)</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tb_products" data-module="Catálogo y Productos" data-count="7007"><summary><span class="table-name">tb_products</span><span class="table-module">Catálogo y Productos</span><span class="table-count">7,007 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tb_products</code></li>
+<li><strong>Módulo:</strong> Catálogo y Productos</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 7,007 registros</li>
+<li><strong>Descripción funcional:</strong> Catálogo de productos, precios, existencias y estado.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tb_products_after_insert</code>, <code>trg_tb_products_after_update</code>, <code>trg_tb_products_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> <code>vw_total_products_by_category</code>.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>ID</code></td><td><code>int unsigned</code></td><td>PK, NN, UN, AI</td><td>—</td><td>—</td><td>Identificador primario de la fila.</td></tr>
+<tr><td>2</td><td><code>SKU</code></td><td><code>varchar(50)</code></td><td>UQ, NN</td><td>—</td><td>—</td><td>Campo SKU; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>3</td><td><code>name</code></td><td><code>varchar(250)</code></td><td>NN</td><td>—</td><td>—</td><td>Nombre visible de la entidad.</td></tr>
+<tr><td>4</td><td><code>description</code></td><td><code>text</code></td><td>—</td><td>—</td><td>—</td><td>Descripción textual de la entidad.</td></tr>
+<tr><td>5</td><td><code>current_price</code></td><td><code>decimal(10,2)</code></td><td>NN</td><td>'0.00'</td><td>—</td><td>Precio vigente.</td></tr>
+<tr><td>6</td><td><code>current_stock</code></td><td><code>int unsigned</code></td><td>NN, UN</td><td>'0'</td><td>—</td><td>Existencia disponible.</td></tr>
+<tr><td>7</td><td><code>status</code></td><td><code>bit(1)</code></td><td>—</td><td>b'1'</td><td>—</td><td>Indicador de estado/activo según la lógica de la entidad.</td></tr>
+<tr><td>8</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>NN</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>9</td><td><code>last_update</code></td><td><code>datetime</code></td><td>NN</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>ID<code>)</code></li>
+<li><code>UNIQUE KEY </code>SKU<code> (</code>SKU<code>)</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tb_refunds" data-module="Envíos, Devoluciones y Cancelaciones" data-count="0"><summary><span class="table-name">tb_refunds</span><span class="table-module">Envíos, Devoluciones y Cancelaciones</span><span class="table-count">0 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tb_refunds</code></li>
+<li><strong>Módulo:</strong> Envíos, Devoluciones y Cancelaciones</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 0 registros (Tabla estructural lista para operación)</li>
+<li><strong>Descripción funcional:</strong> Reembolsos vinculados con órdenes.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tb_refunds_after_insert</code>, <code>trg_tb_refunds_after_update</code>, <code>trg_tb_refunds_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>ID</code></td><td><code>int unsigned</code></td><td>PK, NN, UN, AI</td><td>—</td><td>—</td><td>Identificador primario de la fila.</td></tr>
+<tr><td>2</td><td><code>order_ID</code></td><td><code>int unsigned</code></td><td>FK, NN, UN</td><td>—</td><td>fk_refunds_order: tb_buyer_orders.ID (ON DELETE RESTRICT; ON UPDATE CASCADE)</td><td>Campo order_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>3</td><td><code>reason</code></td><td><code>text</code></td><td>—</td><td>—</td><td>—</td><td>Campo reason; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>4</td><td><code>amount</code></td><td><code>decimal(12,2)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo amount; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>5</td><td><code>status</code></td><td><code>bit(1)</code></td><td>—</td><td>NULL</td><td>—</td><td>Indicador de estado/activo según la lógica de la entidad.</td></tr>
+<tr><td>6</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>7</td><td><code>created_at</code></td><td><code>timestamp</code></td><td>—</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Campo created_at; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>8</td><td><code>created_by</code></td><td><code>varchar(100)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo created_by; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>9</td><td><code>last_update</code></td><td><code>timestamp</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>ID<code>)</code></li>
+<li><code>KEY </code>fk_refunds_order<code> (</code>order_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_refunds_order<code> FOREIGN KEY (</code>order_ID<code>) REFERENCES </code>tb_buyer_orders<code> (</code>ID<code>) ON DELETE RESTRICT ON UPDATE CASCADE</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tb_returns" data-module="Envíos, Devoluciones y Cancelaciones" data-count="0"><summary><span class="table-name">tb_returns</span><span class="table-module">Envíos, Devoluciones y Cancelaciones</span><span class="table-count">0 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tb_returns</code></li>
+<li><strong>Módulo:</strong> Envíos, Devoluciones y Cancelaciones</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 0 registros (Tabla estructural lista para operación)</li>
+<li><strong>Descripción funcional:</strong> Solicitudes de devolución asociadas a órdenes.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tb_returns_after_insert</code>, <code>trg_tb_returns_after_update</code>, <code>trg_tb_returns_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>ID</code></td><td><code>int unsigned</code></td><td>PK, NN, UN, AI</td><td>—</td><td>—</td><td>Identificador primario de la fila.</td></tr>
+<tr><td>2</td><td><code>order_ID</code></td><td><code>int unsigned</code></td><td>FK, NN, UN</td><td>—</td><td>fk_returns_order: tb_buyer_orders.ID (ON DELETE RESTRICT; ON UPDATE CASCADE)</td><td>Campo order_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>3</td><td><code>reason</code></td><td><code>text</code></td><td>—</td><td>—</td><td>—</td><td>Campo reason; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>4</td><td><code>status</code></td><td><code>bit(1)</code></td><td>—</td><td>NULL</td><td>—</td><td>Indicador de estado/activo según la lógica de la entidad.</td></tr>
+<tr><td>5</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>6</td><td><code>created_at</code></td><td><code>timestamp</code></td><td>—</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Campo created_at; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>7</td><td><code>created_by</code></td><td><code>varchar(100)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo created_by; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>8</td><td><code>last_update</code></td><td><code>timestamp</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>ID<code>)</code></li>
+<li><code>KEY </code>fk_returns_order<code> (</code>order_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_returns_order<code> FOREIGN KEY (</code>order_ID<code>) REFERENCES </code>tb_buyer_orders<code> (</code>ID<code>) ON DELETE RESTRICT ON UPDATE CASCADE</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tb_shipments" data-module="Envíos, Devoluciones y Cancelaciones" data-count="0"><summary><span class="table-name">tb_shipments</span><span class="table-module">Envíos, Devoluciones y Cancelaciones</span><span class="table-count">0 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tb_shipments</code></li>
+<li><strong>Módulo:</strong> Envíos, Devoluciones y Cancelaciones</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 0 registros (Tabla estructural lista para operación)</li>
+<li><strong>Descripción funcional:</strong> Envíos de órdenes y dirección de entrega.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tb_shipments_after_insert</code>, <code>trg_tb_shipments_after_update</code>, <code>trg_tb_shipments_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>ID</code></td><td><code>int unsigned</code></td><td>PK, NN, UN, AI</td><td>—</td><td>—</td><td>Identificador primario de la fila.</td></tr>
+<tr><td>2</td><td><code>order_ID</code></td><td><code>int unsigned</code></td><td>FK, NN, UN</td><td>—</td><td>fk_shipments_order: tb_buyer_orders.ID (ON DELETE RESTRICT; ON UPDATE CASCADE)</td><td>Campo order_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>3</td><td><code>address_ID</code></td><td><code>bigint unsigned</code></td><td>FK, UN</td><td>NULL</td><td>fk_shipments_address: tb_user_addresses.ID (ON DELETE RESTRICT; ON UPDATE CASCADE)</td><td>Campo address_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>4</td><td><code>carrier</code></td><td><code>varchar(50)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo carrier; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>5</td><td><code>tracking_number</code></td><td><code>varchar(100)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo tracking_number; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>6</td><td><code>status</code></td><td><code>bit(1)</code></td><td>—</td><td>NULL</td><td>—</td><td>Indicador de estado/activo según la lógica de la entidad.</td></tr>
+<tr><td>7</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>8</td><td><code>created_at</code></td><td><code>timestamp</code></td><td>—</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Campo created_at; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>9</td><td><code>created_by</code></td><td><code>varchar(100)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo created_by; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>10</td><td><code>last_update</code></td><td><code>timestamp</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>ID<code>)</code></li>
+<li><code>KEY </code>fk_shipments_order<code> (</code>order_ID<code>)</code></li>
+<li><code>KEY </code>fk_shipments_address<code> (</code>address_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_shipments_address<code> FOREIGN KEY (</code>address_ID<code>) REFERENCES </code>tb_user_addresses<code> (</code>ID<code>) ON DELETE RESTRICT ON UPDATE CASCADE</code></li>
+<li><code>CONSTRAINT </code>fk_shipments_order<code> FOREIGN KEY (</code>order_ID<code>) REFERENCES </code>tb_buyer_orders<code> (</code>ID<code>) ON DELETE RESTRICT ON UPDATE CASCADE</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tb_user_addresses" data-module="Usuarios y Seguridad" data-count="0"><summary><span class="table-name">tb_user_addresses</span><span class="table-module">Usuarios y Seguridad</span><span class="table-count">0 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tb_user_addresses</code></li>
+<li><strong>Módulo:</strong> Usuarios y Seguridad</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 0 registros (Tabla estructural lista para operación)</li>
+<li><strong>Descripción funcional:</strong> Direcciones de entrega vinculadas a usuarios.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tb_user_addresses_after_insert</code>, <code>trg_tb_user_addresses_after_update</code>, <code>trg_tb_user_addresses_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>ID</code></td><td><code>bigint unsigned</code></td><td>PK, NN, UN, AI</td><td>—</td><td>—</td><td>Identificador primario de la fila.</td></tr>
+<tr><td>2</td><td><code>user_ID</code></td><td><code>int</code></td><td>FK, NN</td><td>—</td><td>fk_addresses_users: tb_users.ID (regla no declarada (MySQL: RESTRICT/NO ACTION))</td><td>Identificador de usuario asociado.</td></tr>
+<tr><td>3</td><td><code>address_label</code></td><td><code>varchar(100)</code></td><td>NN</td><td>—</td><td>—</td><td>Campo address_label; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>4</td><td><code>recipient_name</code></td><td><code>varchar(150)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo recipient_name; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>5</td><td><code>recipient_phone</code></td><td><code>varchar(25)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo recipient_phone; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>6</td><td><code>delivery_instructions</code></td><td><code>varchar(500)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo delivery_instructions; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>7</td><td><code>latitude</code></td><td><code>decimal(10,7)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo latitude; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>8</td><td><code>longitude</code></td><td><code>decimal(10,7)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo longitude; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>9</td><td><code>is_default</code></td><td><code>tinyint(1)</code></td><td>NN</td><td>'0'</td><td>—</td><td>Campo is_default; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>10</td><td><code>status</code></td><td><code>bit(1)</code></td><td>NN</td><td>b'1'</td><td>—</td><td>Indicador de estado/activo según la lógica de la entidad.</td></tr>
+<tr><td>11</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>NN</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>12</td><td><code>last_update</code></td><td><code>datetime</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>ID<code>)</code></li>
+<li><code>KEY </code>idx_user_addresses<code> (</code>user_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_addresses_users<code> FOREIGN KEY (</code>user_ID<code>) REFERENCES </code>tb_users<code> (</code>ID<code>)</code></li>
+<li><code>CONSTRAINT </code>chk_coordinates<code> CHECK ((((</code>latitude<code> is null) and (</code>longitude<code> is null)) or ((</code>latitude<code> is not null) and (</code>longitude<code> is not null))))</code></li>
+<li><code>CONSTRAINT </code>chk_latitude<code> CHECK ((</code>latitude<code> between -(90) and 90))</code></li>
+<li><code>CONSTRAINT </code>chk_longitude<code> CHECK ((</code>longitude<code> between -(180) and 180))</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tb_users" data-module="Usuarios y Seguridad" data-count="7510"><summary><span class="table-name">tb_users</span><span class="table-module">Usuarios y Seguridad</span><span class="table-count">7,510 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tb_users</code></li>
+<li><strong>Módulo:</strong> Usuarios y Seguridad</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 7,510 registros</li>
+<li><strong>Descripción funcional:</strong> Cuentas, credenciales y estado de usuario.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tb_users_after_insert</code>, <code>trg_tb_users_after_update</code>, <code>trg_tb_users_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>ID</code></td><td><code>int</code></td><td>PK, NN, AI</td><td>—</td><td>—</td><td>Identificador primario de la fila.</td></tr>
+<tr><td>2</td><td><code>email</code></td><td><code>varchar(100)</code></td><td>UQ, NN</td><td>—</td><td>—</td><td>Correo de acceso/contacto.</td></tr>
+<tr><td>3</td><td><code>nick</code></td><td><code>varchar(50)</code></td><td>UQ, NN</td><td>—</td><td>—</td><td>Nombre de usuario público o de acceso.</td></tr>
+<tr><td>4</td><td><code>password</code></td><td><code>varchar(255)</code></td><td>NN</td><td>—</td><td>—</td><td>Credencial almacenada.</td></tr>
+<tr><td>5</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>NN</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>6</td><td><code>last_update</code></td><td><code>datetime</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+<tr><td>7</td><td><code>last_login</code></td><td><code>datetime</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo last_login; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>8</td><td><code>status</code></td><td><code>bit(1)</code></td><td>—</td><td>b'1'</td><td>—</td><td>Indicador de estado/activo según la lógica de la entidad.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>ID<code>)</code></li>
+<li><code>UNIQUE KEY </code>email<code> (</code>email<code>)</code></li>
+<li><code>UNIQUE KEY </code>nick<code> (</code>nick<code>)</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tbc_categories" data-module="Catálogo y Productos" data-count="100"><summary><span class="table-name">tbc_categories</span><span class="table-module">Catálogo y Productos</span><span class="table-count">100 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tbc_categories</code></li>
+<li><strong>Módulo:</strong> Catálogo y Productos</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 100 registros</li>
+<li><strong>Descripción funcional:</strong> Catálogo jerárquico de categorías con autorreferencia.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tbc_categories_after_insert</code>, <code>trg_tbc_categories_after_update</code>, <code>trg_tbc_categories_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> <code>vw_total_products_by_category</code>.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>ID</code></td><td><code>int unsigned</code></td><td>PK, NN, UN, AI</td><td>—</td><td>—</td><td>Identificador primario de la fila.</td></tr>
+<tr><td>2</td><td><code>name</code></td><td><code>varchar(120)</code></td><td>UQ, NN</td><td>—</td><td>—</td><td>Nombre visible de la entidad.</td></tr>
+<tr><td>3</td><td><code>description</code></td><td><code>text</code></td><td>—</td><td>—</td><td>—</td><td>Descripción textual de la entidad.</td></tr>
+<tr><td>4</td><td><code>sup_id_category</code></td><td><code>int unsigned</code></td><td>FK, UN</td><td>NULL</td><td>fk_superior_category: tbc_categories.ID (regla no declarada (MySQL: RESTRICT/NO ACTION))</td><td>Campo sup_id_category; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>5</td><td><code>status</code></td><td><code>bit(1)</code></td><td>NN</td><td>b'1'</td><td>—</td><td>Indicador de estado/activo según la lógica de la entidad.</td></tr>
+<tr><td>6</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>NN</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>7</td><td><code>last_update</code></td><td><code>datetime</code></td><td>NN</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>ID<code>)</code></li>
+<li><code>UNIQUE KEY </code>name<code> (</code>name<code>)</code></li>
+<li><code>KEY </code>fk_superior_category<code> (</code>sup_id_category<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_superior_category<code> FOREIGN KEY (</code>sup_id_category<code>) REFERENCES </code>tbc_categories<code> (</code>ID<code>)</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tbc_payment_methods_types" data-module="Catálogo y Productos" data-count="0"><summary><span class="table-name">tbc_payment_methods_types</span><span class="table-module">Catálogo y Productos</span><span class="table-count">0 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tbc_payment_methods_types</code></li>
+<li><strong>Módulo:</strong> Catálogo y Productos</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 0 registros (Tabla estructural lista para operación)</li>
+<li><strong>Descripción funcional:</strong> Catálogo de tipos de método de pago.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tbc_payment_methods_types_after_insert</code>, <code>trg_tbc_payment_methods_types_after_update</code>, <code>trg_tbc_payment_methods_types_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>ID</code></td><td><code>int unsigned</code></td><td>PK, NN, UN, AI</td><td>—</td><td>—</td><td>Identificador primario de la fila.</td></tr>
+<tr><td>2</td><td><code>code</code></td><td><code>varchar(30)</code></td><td>NN</td><td>—</td><td>—</td><td>Campo code; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>3</td><td><code>description</code></td><td><code>text</code></td><td>NN</td><td>—</td><td>—</td><td>Descripción textual de la entidad.</td></tr>
+<tr><td>4</td><td><code>status</code></td><td><code>bit(1)</code></td><td>NN</td><td>b'1'</td><td>—</td><td>Indicador de estado/activo según la lógica de la entidad.</td></tr>
+<tr><td>5</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>NN</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>6</td><td><code>last_update</code></td><td><code>datetime</code></td><td>—</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>ID<code>)</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tbd_address_components" data-module="Usuarios y Seguridad" data-count="0"><summary><span class="table-name">tbd_address_components</span><span class="table-module">Usuarios y Seguridad</span><span class="table-count">0 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tbd_address_components</code></li>
+<li><strong>Módulo:</strong> Usuarios y Seguridad</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 0 registros (Tabla estructural lista para operación)</li>
+<li><strong>Descripción funcional:</strong> Componentes jerárquicos de direcciones y relación padre-hijo.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tbd_address_components_after_insert</code>, <code>trg_tbd_address_components_after_update</code>, <code>trg_tbd_address_components_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>ID</code></td><td><code>bigint unsigned</code></td><td>PK, NN, UN, AI</td><td>—</td><td>—</td><td>Identificador primario de la fila.</td></tr>
+<tr><td>2</td><td><code>address_ID</code></td><td><code>bigint unsigned</code></td><td>FK, UQ, NN, UN</td><td>—</td><td>fk_component_address: tb_user_addresses.ID (ON DELETE RESTRICT); fk_component_parent: tbd_address_components.address_ID (ON DELETE RESTRICT)</td><td>Campo address_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>3</td><td><code>value</code></td><td><code>varchar(255)</code></td><td>NN</td><td>—</td><td>—</td><td>Campo value; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>4</td><td><code>component_type</code></td><td><code>varchar(50)</code></td><td>NN</td><td>—</td><td>—</td><td>Campo component_type; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>5</td><td><code>status</code></td><td><code>bit(1)</code></td><td>NN</td><td>b'1'</td><td>—</td><td>Indicador de estado/activo según la lógica de la entidad.</td></tr>
+<tr><td>6</td><td><code>address_sup_ID</code></td><td><code>bigint unsigned</code></td><td>FK, UN</td><td>NULL</td><td>fk_component_parent: tbd_address_components.ID (ON DELETE RESTRICT)</td><td>Campo address_sup_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>7</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>NN</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>8</td><td><code>last_update</code></td><td><code>datetime</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>ID<code>)</code></li>
+<li><code>UNIQUE KEY </code>uk_address_component<code> (</code>address_ID<code>,</code>ID<code>)</code></li>
+<li><code>KEY </code>idx_address_parent<code> (</code>address_ID<code>,</code>address_sup_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_component_address<code> FOREIGN KEY (</code>address_ID<code>) REFERENCES </code>tb_user_addresses<code> (</code>ID<code>) ON DELETE RESTRICT</code></li>
+<li><code>CONSTRAINT </code>fk_component_parent<code> FOREIGN KEY (</code>address_ID<code>, </code>address_sup_ID<code>) REFERENCES </code>tbd_address_components<code> (</code>address_ID<code>, </code>ID<code>) ON DELETE RESTRICT</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tbd_cancellation_items" data-module="Envíos, Devoluciones y Cancelaciones" data-count="0"><summary><span class="table-name">tbd_cancellation_items</span><span class="table-module">Envíos, Devoluciones y Cancelaciones</span><span class="table-count">0 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tbd_cancellation_items</code></li>
+<li><strong>Módulo:</strong> Envíos, Devoluciones y Cancelaciones</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 0 registros (Tabla estructural lista para operación)</li>
+<li><strong>Descripción funcional:</strong> Productos incluidos en cancelaciones.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tbd_cancellation_items_after_insert</code>, <code>trg_tbd_cancellation_items_after_update</code>, <code>trg_tbd_cancellation_items_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>cancellation_ID</code></td><td><code>int unsigned</code></td><td>PK, FK, NN, UN</td><td>—</td><td>fk_cancellation_items_cancellation: tb_order_cancellations.ID (ON DELETE CASCADE; ON UPDATE CASCADE)</td><td>Campo cancellation_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>2</td><td><code>product_ID</code></td><td><code>int unsigned</code></td><td>PK, FK, NN, UN</td><td>—</td><td>fk_cancellation_items_product: tb_products.ID (ON DELETE RESTRICT; ON UPDATE CASCADE)</td><td>Identificador de producto asociado.</td></tr>
+<tr><td>3</td><td><code>quantity</code></td><td><code>int unsigned</code></td><td>UN</td><td>NULL</td><td>—</td><td>Campo quantity; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>4</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>5</td><td><code>created_at</code></td><td><code>timestamp</code></td><td>—</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Campo created_at; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>6</td><td><code>created_by</code></td><td><code>varchar(100)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo created_by; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>7</td><td><code>last_update</code></td><td><code>timestamp</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>cancellation_ID<code>,</code>product_ID<code>)</code></li>
+<li><code>KEY </code>fk_cancellation_items_product<code> (</code>product_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_cancellation_items_cancellation<code> FOREIGN KEY (</code>cancellation_ID<code>) REFERENCES </code>tb_order_cancellations<code> (</code>ID<code>) ON DELETE CASCADE ON UPDATE CASCADE</code></li>
+<li><code>CONSTRAINT </code>fk_cancellation_items_product<code> FOREIGN KEY (</code>product_ID<code>) REFERENCES </code>tb_products<code> (</code>ID<code>) ON DELETE RESTRICT ON UPDATE CASCADE</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tbd_carts_items" data-module="Órdenes y Pagos" data-count="0"><summary><span class="table-name">tbd_carts_items</span><span class="table-module">Órdenes y Pagos</span><span class="table-count">0 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tbd_carts_items</code></li>
+<li><strong>Módulo:</strong> Órdenes y Pagos</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 0 registros (Tabla estructural lista para operación)</li>
+<li><strong>Descripción funcional:</strong> Renglones de producto/proveedor dentro de carritos.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tbd_carts_items_after_insert</code>, <code>trg_tbd_carts_items_after_update</code>, <code>trg_tbd_carts_items_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>cart_ID</code></td><td><code>int unsigned</code></td><td>PK, FK, NN, UN</td><td>—</td><td>tbd_carts_items_ibfk_1: tb_carts.ID (regla no declarada (MySQL: RESTRICT/NO ACTION))</td><td>Campo cart_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>2</td><td><code>provider_ID</code></td><td><code>int</code></td><td>PK, FK, NN</td><td>—</td><td>tbd_carts_items_ibfk_2: tbd_products_users_providers.user_ID (regla no declarada (MySQL: RESTRICT/NO ACTION))</td><td>Campo provider_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>3</td><td><code>product_ID</code></td><td><code>int unsigned</code></td><td>PK, FK, NN, UN</td><td>—</td><td>tbd_carts_items_ibfk_3: tbd_products_users_providers.product_ID (regla no declarada (MySQL: RESTRICT/NO ACTION))</td><td>Identificador de producto asociado.</td></tr>
+<tr><td>4</td><td><code>quantity</code></td><td><code>int unsigned</code></td><td>NN, UN</td><td>'1'</td><td>—</td><td>Campo quantity; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>5</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>NN</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>cart_ID<code>,</code>provider_ID<code>,</code>product_ID<code>)</code></li>
+<li><code>KEY </code>provider_ID<code> (</code>provider_ID<code>)</code></li>
+<li><code>KEY </code>product_ID<code> (</code>product_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>tbd_carts_items_ibfk_1<code> FOREIGN KEY (</code>cart_ID<code>) REFERENCES </code>tb_carts<code> (</code>ID<code>)</code></li>
+<li><code>CONSTRAINT </code>tbd_carts_items_ibfk_2<code> FOREIGN KEY (</code>provider_ID<code>) REFERENCES </code>tbd_products_users_providers<code> (</code>user_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>tbd_carts_items_ibfk_3<code> FOREIGN KEY (</code>product_ID<code>) REFERENCES </code>tbd_products_users_providers<code> (</code>product_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>chk_cart_quantity<code> CHECK ((</code>quantity<code> &gt; 0))</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tbd_order_items" data-module="Órdenes y Pagos" data-count="0"><summary><span class="table-name">tbd_order_items</span><span class="table-module">Órdenes y Pagos</span><span class="table-count">0 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tbd_order_items</code></li>
+<li><strong>Módulo:</strong> Órdenes y Pagos</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 0 registros (Tabla estructural lista para operación)</li>
+<li><strong>Descripción funcional:</strong> Renglones de producto/proveedor dentro de órdenes.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tbd_order_items_after_insert</code>, <code>trg_tbd_order_items_after_update</code>, <code>trg_tbd_order_items_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>ID</code></td><td><code>int unsigned</code></td><td>PK, NN, UN, AI</td><td>—</td><td>—</td><td>Identificador primario de la fila.</td></tr>
+<tr><td>2</td><td><code>seller_order_ID</code></td><td><code>int unsigned</code></td><td>FK, NN, UN</td><td>—</td><td>tbd_order_items_ibfk_1: tb_buyer_orders.ID (regla no declarada (MySQL: RESTRICT/NO ACTION))</td><td>Campo seller_order_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>3</td><td><code>product_ID</code></td><td><code>int unsigned</code></td><td>FK, NN, UN</td><td>—</td><td>tbd_order_items_ibfk_2: tbd_products_users_providers.product_ID (regla no declarada (MySQL: RESTRICT/NO ACTION))</td><td>Identificador de producto asociado.</td></tr>
+<tr><td>4</td><td><code>provider_ID</code></td><td><code>int</code></td><td>FK, NN</td><td>—</td><td>tbd_order_items_ibfk_3: tbd_products_users_providers.user_ID (regla no declarada (MySQL: RESTRICT/NO ACTION))</td><td>Campo provider_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>5</td><td><code>product_name</code></td><td><code>varchar(255)</code></td><td>NN</td><td>—</td><td>—</td><td>Campo product_name; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>6</td><td><code>quantity</code></td><td><code>int unsigned</code></td><td>NN, UN</td><td>—</td><td>—</td><td>Campo quantity; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>7</td><td><code>unit_price</code></td><td><code>decimal(12,2)</code></td><td>NN</td><td>—</td><td>—</td><td>Campo unit_price; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>8</td><td><code>subtotal</code></td><td><code>decimal(12,2)</code></td><td>—</td><td>—</td><td>—</td><td>Campo subtotal; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>9</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>NN</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>ID<code>)</code></li>
+<li><code>KEY </code>seller_order_ID<code> (</code>seller_order_ID<code>)</code></li>
+<li><code>KEY </code>product_ID<code> (</code>product_ID<code>)</code></li>
+<li><code>KEY </code>provider_ID<code> (</code>provider_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>tbd_order_items_ibfk_1<code> FOREIGN KEY (</code>seller_order_ID<code>) REFERENCES </code>tb_buyer_orders<code> (</code>ID<code>)</code></li>
+<li><code>CONSTRAINT </code>tbd_order_items_ibfk_2<code> FOREIGN KEY (</code>product_ID<code>) REFERENCES </code>tbd_products_users_providers<code> (</code>product_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>tbd_order_items_ibfk_3<code> FOREIGN KEY (</code>provider_ID<code>) REFERENCES </code>tbd_products_users_providers<code> (</code>user_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>tbd_order_items_chk_1<code> CHECK ((</code>quantity<code> &gt; 0))</code></li>
+<li><code>CONSTRAINT </code>tbd_order_items_chk_2<code> CHECK ((</code>unit_price<code> &gt;= 0))</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tbd_products_categorias" data-module="Catálogo y Productos" data-count="15348"><summary><span class="table-name">tbd_products_categorias</span><span class="table-module">Catálogo y Productos</span><span class="table-count">15,348 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tbd_products_categorias</code></li>
+<li><strong>Módulo:</strong> Catálogo y Productos</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 15,348 registros</li>
+<li><strong>Descripción funcional:</strong> Asociación de productos con categorías.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tbd_products_categorias_after_insert</code>, <code>trg_tbd_products_categorias_after_update</code>, <code>trg_tbd_products_categorias_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> <code>vw_total_products_by_category</code>.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>product_ID</code></td><td><code>int unsigned</code></td><td>PK, FK, NN, UN</td><td>—</td><td>fk_product1: tb_products.ID (regla no declarada (MySQL: RESTRICT/NO ACTION))</td><td>Identificador de producto asociado.</td></tr>
+<tr><td>2</td><td><code>category_ID</code></td><td><code>int unsigned</code></td><td>PK, FK, NN, UN</td><td>—</td><td>fk_category1: tbc_categories.ID (regla no declarada (MySQL: RESTRICT/NO ACTION))</td><td>Identificador de categoría asociada.</td></tr>
+<tr><td>3</td><td><code>status</code></td><td><code>bit(1)</code></td><td>NN</td><td>b'1'</td><td>—</td><td>Indicador de estado/activo según la lógica de la entidad.</td></tr>
+<tr><td>4</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>NN</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>5</td><td><code>last_update</code></td><td><code>datetime</code></td><td>NN</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>product_ID<code>,</code>category_ID<code>)</code></li>
+<li><code>KEY </code>fk_category1_idx<code> (</code>category_ID<code>)</code></li>
+<li><code>KEY </code>fk_product1_idx<code> (</code>product_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_category1<code> FOREIGN KEY (</code>category_ID<code>) REFERENCES </code>tbc_categories<code> (</code>ID<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_product1<code> FOREIGN KEY (</code>product_ID<code>) REFERENCES </code>tb_products<code> (</code>ID<code>)</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tbd_products_users_providers" data-module="Catálogo y Productos" data-count="7007"><summary><span class="table-name">tbd_products_users_providers</span><span class="table-module">Catálogo y Productos</span><span class="table-count">7,007 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tbd_products_users_providers</code></li>
+<li><strong>Módulo:</strong> Catálogo y Productos</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 7,007 registros</li>
+<li><strong>Descripción funcional:</strong> Ofertas de productos por proveedores/vendedores.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tbd_products_users_providers_after_insert</code>, <code>trg_tbd_products_users_providers_after_update</code>, <code>trg_tbd_products_users_providers_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>user_ID</code></td><td><code>int</code></td><td>PK, FK, NN</td><td>—</td><td>fk_user1: tb_users.ID (regla no declarada (MySQL: RESTRICT/NO ACTION))</td><td>Identificador de usuario asociado.</td></tr>
+<tr><td>2</td><td><code>product_ID</code></td><td><code>int unsigned</code></td><td>PK, FK, NN, UN</td><td>—</td><td>fk_products2: tb_products.ID (regla no declarada (MySQL: RESTRICT/NO ACTION))</td><td>Identificador de producto asociado.</td></tr>
+<tr><td>3</td><td><code>type_ownership</code></td><td><code>enum('Owner','Reseller','Distributor')</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo type_ownership; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>4</td><td><code>status</code></td><td><code>bit(1)</code></td><td>NN</td><td>b'1'</td><td>—</td><td>Indicador de estado/activo según la lógica de la entidad.</td></tr>
+<tr><td>5</td><td><code>avalaible_date</code></td><td><code>datetime</code></td><td>NN</td><td>—</td><td>—</td><td>Campo avalaible_date; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>6</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>NN</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>7</td><td><code>last_update</code></td><td><code>datetime</code></td><td>NN</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>user_ID<code>,</code>product_ID<code>)</code></li>
+<li><code>KEY </code>fk_products2<code> (</code>product_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_products2<code> FOREIGN KEY (</code>product_ID<code>) REFERENCES </code>tb_products<code> (</code>ID<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_user1<code> FOREIGN KEY (</code>user_ID<code>) REFERENCES </code>tb_users<code> (</code>ID<code>)</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tbd_return_items" data-module="Envíos, Devoluciones y Cancelaciones" data-count="0"><summary><span class="table-name">tbd_return_items</span><span class="table-module">Envíos, Devoluciones y Cancelaciones</span><span class="table-count">0 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tbd_return_items</code></li>
+<li><strong>Módulo:</strong> Envíos, Devoluciones y Cancelaciones</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 0 registros (Tabla estructural lista para operación)</li>
+<li><strong>Descripción funcional:</strong> Productos incluidos en solicitudes de devolución.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tbd_return_items_after_insert</code>, <code>trg_tbd_return_items_after_update</code>, <code>trg_tbd_return_items_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>return_ID</code></td><td><code>int unsigned</code></td><td>PK, FK, NN, UN</td><td>—</td><td>fk_return_items_return: tb_returns.ID (ON DELETE CASCADE; ON UPDATE CASCADE)</td><td>Campo return_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>2</td><td><code>product_ID</code></td><td><code>int unsigned</code></td><td>PK, FK, NN, UN</td><td>—</td><td>fk_return_items_product: tb_products.ID (ON DELETE RESTRICT; ON UPDATE CASCADE)</td><td>Identificador de producto asociado.</td></tr>
+<tr><td>3</td><td><code>quantity</code></td><td><code>int unsigned</code></td><td>UN</td><td>NULL</td><td>—</td><td>Campo quantity; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>4</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>5</td><td><code>created_at</code></td><td><code>timestamp</code></td><td>—</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Campo created_at; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>6</td><td><code>created_by</code></td><td><code>varchar(100)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo created_by; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>7</td><td><code>last_update</code></td><td><code>timestamp</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>return_ID<code>,</code>product_ID<code>)</code></li>
+<li><code>KEY </code>fk_return_items_product<code> (</code>product_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_return_items_product<code> FOREIGN KEY (</code>product_ID<code>) REFERENCES </code>tb_products<code> (</code>ID<code>) ON DELETE RESTRICT ON UPDATE CASCADE</code></li>
+<li><code>CONSTRAINT </code>fk_return_items_return<code> FOREIGN KEY (</code>return_ID<code>) REFERENCES </code>tb_returns<code> (</code>ID<code>) ON DELETE CASCADE ON UPDATE CASCADE</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tbd_user_payment_methods" data-module="Usuarios y Seguridad" data-count="0"><summary><span class="table-name">tbd_user_payment_methods</span><span class="table-module">Usuarios y Seguridad</span><span class="table-count">0 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tbd_user_payment_methods</code></li>
+<li><strong>Módulo:</strong> Usuarios y Seguridad</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 0 registros (Tabla estructural lista para operación)</li>
+<li><strong>Descripción funcional:</strong> Métodos de pago asociados a usuarios.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tbd_user_payment_methods_after_insert</code>, <code>trg_tbd_user_payment_methods_after_update</code>, <code>trg_tbd_user_payment_methods_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>ID</code></td><td><code>bigint unsigned</code></td><td>PK, NN, UN, AI</td><td>—</td><td>—</td><td>Identificador primario de la fila.</td></tr>
+<tr><td>2</td><td><code>user_ID</code></td><td><code>int</code></td><td>FK, NN</td><td>—</td><td>fk_user_payment_user: tb_users.ID (regla no declarada (MySQL: RESTRICT/NO ACTION))</td><td>Identificador de usuario asociado.</td></tr>
+<tr><td>3</td><td><code>payment_method_type_ID</code></td><td><code>int unsigned</code></td><td>FK, NN, UN</td><td>—</td><td>fk_user_payment_type: tbc_payment_methods_types.ID (regla no declarada (MySQL: RESTRICT/NO ACTION))</td><td>Campo payment_method_type_ID; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>4</td><td><code>provider</code></td><td><code>varchar(60)</code></td><td>UQ, NN</td><td>—</td><td>—</td><td>Campo provider; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>5</td><td><code>provider_method_ref</code></td><td><code>varchar(255)</code></td><td>UQ, NN</td><td>—</td><td>—</td><td>Campo provider_method_ref; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>6</td><td><code>label</code></td><td><code>varchar(100)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo label; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>7</td><td><code>last_four</code></td><td><code>char(4)</code></td><td>—</td><td>NULL</td><td>—</td><td>Campo last_four; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>8</td><td><code>is_default</code></td><td><code>tinyint(1)</code></td><td>NN</td><td>'0'</td><td>—</td><td>Campo is_default; interpretación funcional inferida por el nombre. Regla efectiva según restricciones y procesos de la aplicación.</td></tr>
+<tr><td>9</td><td><code>status</code></td><td><code>bit(1)</code></td><td>NN</td><td>b'1'</td><td>—</td><td>Indicador de estado/activo según la lógica de la entidad.</td></tr>
+<tr><td>10</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>NN</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>11</td><td><code>last_update</code></td><td><code>datetime</code></td><td>—</td><td>NULL</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>ID<code>)</code></li>
+<li><code>UNIQUE KEY </code>uk_provider_method<code> (</code>provider<code>,</code>provider_method_ref<code>)</code></li>
+<li><code>KEY </code>fk_user_idx<code> (</code>user_ID<code>)</code></li>
+<li><code>KEY </code>fk_payment_type_idx<code> (</code>payment_method_type_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_user_payment_type<code> FOREIGN KEY (</code>payment_method_type_ID<code>) REFERENCES </code>tbc_payment_methods_types<code> (</code>ID<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_user_payment_user<code> FOREIGN KEY (</code>user_ID<code>) REFERENCES </code>tb_users<code> (</code>ID<code>)</code></li>
+</ul>
+</div></details>
+<details class="table-card" data-table="tbd_users_wishlist_products" data-module="Usuarios y Seguridad" data-count="0"><summary><span class="table-name">tbd_users_wishlist_products</span><span class="table-module">Usuarios y Seguridad</span><span class="table-count">0 registros</span><span class="chevron">▼</span></summary><div class="ficha-content">
+<ul>
+<li><strong>Nombre:</strong> <code>tbd_users_wishlist_products</code></li>
+<li><strong>Módulo:</strong> Usuarios y Seguridad</li>
+<li><strong>Motor:</strong> InnoDB</li>
+<li><strong>Cotejamiento:</strong> utf8mb4 (<code>utf8mb4_0900_ai_ci</code>, según DDL).</li>
+<li><strong>Registros Actuales:</strong> 0 registros (Tabla estructural lista para operación)</li>
+<li><strong>Descripción funcional:</strong> Productos guardados por usuarios en listas de deseos.</li>
+<li><strong>Triggers asociados:</strong> <code>trg_tbd_users_wishlist_products_after_insert</code>, <code>trg_tbd_users_wishlist_products_after_update</code>, <code>trg_tbd_users_wishlist_products_after_delete</code>.</li>
+<li><strong>Vistas asociadas:</strong> ninguna.</li>
+</ul>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>Nombre de Columna</th><th>Tipo de Dato y Longitud</th><th>Restricciones (PK, FK, UQ, NN, UN, AI)</th><th>Valor por Defecto</th><th>Referencia FK (Tabla.Columna y reglas ON DELETE / ON UPDATE)</th><th>Descripción Funcional</th></tr></thead><tbody>
+<tr><td>1</td><td><code>user_ID</code></td><td><code>int</code></td><td>PK, FK, NN</td><td>—</td><td>fk_user2: tb_users.ID (regla no declarada (MySQL: RESTRICT/NO ACTION))</td><td>Identificador de usuario asociado.</td></tr>
+<tr><td>2</td><td><code>product_ID</code></td><td><code>int unsigned</code></td><td>PK, FK, NN, UN</td><td>—</td><td>fk_products3: tb_products.ID (regla no declarada (MySQL: RESTRICT/NO ACTION))</td><td>Identificador de producto asociado.</td></tr>
+<tr><td>3</td><td><code>status</code></td><td><code>bit(1)</code></td><td>NN</td><td>b'1'</td><td>—</td><td>Indicador de estado/activo según la lógica de la entidad.</td></tr>
+<tr><td>4</td><td><code>creation_date</code></td><td><code>datetime</code></td><td>NN</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de creación del registro.</td></tr>
+<tr><td>5</td><td><code>last_update</code></td><td><code>datetime</code></td><td>NN</td><td>CURRENT_TIMESTAMP</td><td>—</td><td>Fecha y hora de la última modificación.</td></tr>
+</tbody></table></div>
+<p><strong>Índices y restricciones declaradas:</strong></p>
+<ul>
+<li><code>PRIMARY KEY (</code>user_ID<code>,</code>product_ID<code>)</code></li>
+<li><code>KEY </code>fk_products3<code> (</code>product_ID<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_products3<code> FOREIGN KEY (</code>product_ID<code>) REFERENCES </code>tb_products<code> (</code>ID<code>)</code></li>
+<li><code>CONSTRAINT </code>fk_user2<code> FOREIGN KEY (</code>user_ID<code>) REFERENCES </code>tb_users<code> (</code>ID<code>)</code></li>
+</ul>
+</div></details>
+<h2>Catálogo de automatización y vistas</h2>
+<h3>Vistas</h3>
+<div class="table-wrap"><table><thead><tr><th>Vista</th><th>Tablas base detectadas</th><th>Propósito (según SQL)</th></tr></thead><tbody>
+<tr><td><code>vw_total_products_by_category</code></td><td><code>tbc_categories</code>, <code>tbd_products_categorias</code>, <code>tb_products</code></td><td>Árbol recursivo y agregados de productos por categoría.</td></tr>
+<tr><td><code>vw_trazabilidad_address_components</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_buyer_orders</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_cancellation_items</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_carts</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_carts_items</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_categories</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_order_cancellations</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_order_items</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_payment_methods</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_payment_methods_types</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_payment_transaction</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_payments</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_people</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_productos</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_products_categorias</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_products_users_providers</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_refunds</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_return_items</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_returns</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_shipments</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_user_addresses</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_user_payment_methods</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_users_wishlist_products</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+<tr><td><code>vw_trazabilidad_usuarios</code></td><td><code>tb_logs</code></td><td>Consulta de trazabilidad de operaciones desde <code>tb_logs</code>.</td></tr>
+</tbody></table></div>
+<h3>Procedimientos almacenados</h3>
+<div class="table-wrap"><table><thead><tr><th>Procedimiento</th><th>Propósito / tablas según código</th></tr></thead><tbody>
+<tr><td><code>sp_register_new_user</code></td><td>Ver cuerpo</td></tr>
+<tr><td><code>sp_registrar_producto_categoria</code></td><td>Ver cuerpo</td></tr>
+<tr><td><code>sp_restore_product</code></td><td>Ver cuerpo</td></tr>
+<tr><td><code>sp_simular_usuarios_masivo</code></td><td>Ver cuerpo</td></tr>
+<tr><td><code>sp_soft_delete_product</code></td><td>Ver cuerpo</td></tr>
+</tbody></table></div>
+<h3>Funciones</h3>
+<div class="table-wrap"><table><thead><tr><th>Función</th><th>Características declaradas</th></tr></thead><tbody>
+<tr><td><code>fn_calcular_edad</code></td><td>NO SQL     DETERMINISTIC</td></tr>
+<tr><td><code>fn_elemento_aleatorio</code></td><td>NO SQL</td></tr>
+<tr><td><code>fn_entero_aleatorio</code></td><td>NO SQL</td></tr>
+<tr><td><code>fn_estatus_probabilistico</code></td><td>NO SQL</td></tr>
+<tr><td><code>fn_generar_fecha_nacimiento</code></td><td>NO SQL</td></tr>
+<tr><td><code>fn_verificar_stock</code></td><td>READS SQL DATA</td></tr>
+</tbody></table></div>
+<h3>Eventos programados</h3>
+<div class="table-wrap"><table><thead><tr><th>Evento</th><th>Agenda y operación</th></tr></thead><tbody>
+<tr><td><code>evt_depurar_logs_antiguos</code></td><td>ON SCHEDULE EVERY 1 DAY STARTS '2026-11-11 23:07:50' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN</td></tr>
+<tr><td><code>evt_desactivar_productos_sin_stock</code></td><td>ON SCHEDULE EVERY 1 HOUR STARTS '2026-11-11 23:06:50' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN</td></tr>
+</tbody></table></div>
+<h3>Triggers de auditoría</h3>
+<p>El esquema contiene <strong>72 triggers</strong>. Son AFTER INSERT, AFTER UPDATE o AFTER DELETE y escriben eventos en <code>tb_logs</code> con tabla, operación, usuario y fecha. Se distribuyen en las tablas operativas que tienen las tres operaciones; el inventario completo:</p>
+<div class="table-wrap"><table><thead><tr><th>Trigger</th><th>Evento/tabla</th><th>Destino</th></tr></thead><tbody>
+<tr><td><code>trg_tb_buyer_orders_after_insert</code></td><td>AFTER INSERT ON <code>tb_buyer_orders</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_buyer_orders_after_update</code></td><td>AFTER UPDATE ON <code>tb_buyer_orders</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_buyer_orders_after_delete</code></td><td>AFTER DELETE ON <code>tb_buyer_orders</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_carts_after_insert</code></td><td>AFTER INSERT ON <code>tb_carts</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_carts_after_update</code></td><td>AFTER UPDATE ON <code>tb_carts</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_carts_after_delete</code></td><td>AFTER DELETE ON <code>tb_carts</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_order_cancellations_after_insert</code></td><td>AFTER INSERT ON <code>tb_order_cancellations</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_order_cancellations_after_update</code></td><td>AFTER UPDATE ON <code>tb_order_cancellations</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_order_cancellations_after_delete</code></td><td>AFTER DELETE ON <code>tb_order_cancellations</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_payment_methods_after_insert</code></td><td>AFTER INSERT ON <code>tb_payment_methods</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_payment_methods_after_update</code></td><td>AFTER UPDATE ON <code>tb_payment_methods</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_payment_methods_after_delete</code></td><td>AFTER DELETE ON <code>tb_payment_methods</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_payment_transaction_after_insert</code></td><td>AFTER INSERT ON <code>tb_payment_transaction</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_payment_transaction_after_update</code></td><td>AFTER UPDATE ON <code>tb_payment_transaction</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_payment_transaction_after_delete</code></td><td>AFTER DELETE ON <code>tb_payment_transaction</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_payments_after_insert</code></td><td>AFTER INSERT ON <code>tb_payments</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_payments_after_update</code></td><td>AFTER UPDATE ON <code>tb_payments</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_payments_after_delete</code></td><td>AFTER DELETE ON <code>tb_payments</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_people_after_insert</code></td><td>AFTER INSERT ON <code>tb_people</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_people_after_update</code></td><td>AFTER UPDATE ON <code>tb_people</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_people_after_delete</code></td><td>AFTER DELETE ON <code>tb_people</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_products_after_insert</code></td><td>AFTER INSERT ON <code>tb_products</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_products_after_update</code></td><td>AFTER UPDATE ON <code>tb_products</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_products_after_delete</code></td><td>AFTER DELETE ON <code>tb_products</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_refunds_after_insert</code></td><td>AFTER INSERT ON <code>tb_refunds</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_refunds_after_update</code></td><td>AFTER UPDATE ON <code>tb_refunds</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_refunds_after_delete</code></td><td>AFTER DELETE ON <code>tb_refunds</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_returns_after_insert</code></td><td>AFTER INSERT ON <code>tb_returns</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_returns_after_update</code></td><td>AFTER UPDATE ON <code>tb_returns</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_returns_after_delete</code></td><td>AFTER DELETE ON <code>tb_returns</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_shipments_after_insert</code></td><td>AFTER INSERT ON <code>tb_shipments</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_shipments_after_update</code></td><td>AFTER UPDATE ON <code>tb_shipments</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_shipments_after_delete</code></td><td>AFTER DELETE ON <code>tb_shipments</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_user_addresses_after_insert</code></td><td>AFTER INSERT ON <code>tb_user_addresses</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_user_addresses_after_update</code></td><td>AFTER UPDATE ON <code>tb_user_addresses</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_user_addresses_after_delete</code></td><td>AFTER DELETE ON <code>tb_user_addresses</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_users_after_insert</code></td><td>AFTER INSERT ON <code>tb_users</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_users_after_update</code></td><td>AFTER UPDATE ON <code>tb_users</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tb_users_after_delete</code></td><td>AFTER DELETE ON <code>tb_users</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbc_categories_after_insert</code></td><td>AFTER INSERT ON <code>tbc_categories</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbc_categories_after_update</code></td><td>AFTER UPDATE ON <code>tbc_categories</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbc_categories_after_delete</code></td><td>AFTER DELETE ON <code>tbc_categories</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbc_payment_methods_types_after_insert</code></td><td>AFTER INSERT ON <code>tbc_payment_methods_types</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbc_payment_methods_types_after_update</code></td><td>AFTER UPDATE ON <code>tbc_payment_methods_types</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbc_payment_methods_types_after_delete</code></td><td>AFTER DELETE ON <code>tbc_payment_methods_types</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_address_components_after_insert</code></td><td>AFTER INSERT ON <code>tbd_address_components</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_address_components_after_update</code></td><td>AFTER UPDATE ON <code>tbd_address_components</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_address_components_after_delete</code></td><td>AFTER DELETE ON <code>tbd_address_components</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_cancellation_items_after_insert</code></td><td>AFTER INSERT ON <code>tbd_cancellation_items</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_cancellation_items_after_update</code></td><td>AFTER UPDATE ON <code>tbd_cancellation_items</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_cancellation_items_after_delete</code></td><td>AFTER DELETE ON <code>tbd_cancellation_items</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_carts_items_after_insert</code></td><td>AFTER INSERT ON <code>tbd_carts_items</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_carts_items_after_update</code></td><td>AFTER UPDATE ON <code>tbd_carts_items</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_carts_items_after_delete</code></td><td>AFTER DELETE ON <code>tbd_carts_items</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_order_items_after_insert</code></td><td>AFTER INSERT ON <code>tbd_order_items</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_order_items_after_update</code></td><td>AFTER UPDATE ON <code>tbd_order_items</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_order_items_after_delete</code></td><td>AFTER DELETE ON <code>tbd_order_items</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_products_categorias_after_insert</code></td><td>AFTER INSERT ON <code>tbd_products_categorias</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_products_categorias_after_update</code></td><td>AFTER UPDATE ON <code>tbd_products_categorias</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_products_categorias_after_delete</code></td><td>AFTER DELETE ON <code>tbd_products_categorias</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_products_users_providers_after_insert</code></td><td>AFTER INSERT ON <code>tbd_products_users_providers</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_products_users_providers_after_update</code></td><td>AFTER UPDATE ON <code>tbd_products_users_providers</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_products_users_providers_after_delete</code></td><td>AFTER DELETE ON <code>tbd_products_users_providers</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_return_items_after_insert</code></td><td>AFTER INSERT ON <code>tbd_return_items</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_return_items_after_update</code></td><td>AFTER UPDATE ON <code>tbd_return_items</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_return_items_after_delete</code></td><td>AFTER DELETE ON <code>tbd_return_items</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_user_payment_methods_after_insert</code></td><td>AFTER INSERT ON <code>tbd_user_payment_methods</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_user_payment_methods_after_update</code></td><td>AFTER UPDATE ON <code>tbd_user_payment_methods</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_user_payment_methods_after_delete</code></td><td>AFTER DELETE ON <code>tbd_user_payment_methods</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_users_wishlist_products_after_insert</code></td><td>AFTER INSERT ON <code>tbd_users_wishlist_products</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_users_wishlist_products_after_update</code></td><td>AFTER UPDATE ON <code>tbd_users_wishlist_products</code></td><td><code>tb_logs</code></td></tr>
+<tr><td><code>trg_tbd_users_wishlist_products_after_delete</code></td><td>AFTER DELETE ON <code>tbd_users_wishlist_products</code></td><td><code>tb_logs</code></td></tr>
+</tbody></table></div>
+<hr>
+<h2>Notas de interpretación</h2>
+<ul>
+<li>Los tipos, nullabilidad, claves, valores predeterminados, motor y cotejamiento provienen del DDL. La descripción funcional por columna es interpretativa cuando el respaldo no contiene comentarios <code>COMMENT</code>.</li>
+<li>Las reglas FK <code>ON DELETE</code> y <code>ON UPDATE</code> solo se consignan si aparecen explícitamente; en ausencia de cláusula se indica la regla predeterminada de restricción de MySQL.</li>
+<li>El archivo SQL registra definiciones y también datos. El diccionario se construye desde <code>CREATE TABLE</code>, <code>CREATE VIEW</code> y bloques de rutinas, sin tratar filas de datos como DDL.</li>
+</ul><div id="empty" class="empty">No hay resultados para esos filtros.</div></main><script>const q=document.querySelector('#search'),m=document.querySelector('#module'),details=[...document.querySelectorAll('.table-card')],toggle=document.querySelector('#toggleAll');toggle.addEventListener('click',()=>{const expand=details.some(d=>!d.open);details.forEach(d=>d.open=expand)});let beforePrint={open:[],term:'',module:''};window.addEventListener('beforeprint',()=>{beforePrint={open:details.map(d=>d.open),term:q.value,module:m.value};q.value='';m.value='';filter();details.forEach(d=>d.open=true)});window.addEventListener('afterprint',()=>{q.value=beforePrint.term;m.value=beforePrint.module;filter();details.forEach((d,i)=>d.open=beforePrint.open[i])});function filter(){const term=q.value.trim().toLowerCase(),mod=m.value;document.querySelectorAll('#content table').forEach(t=>{for(const r of t.querySelectorAll('tbody tr')){const card=t.closest(".table-card"),moduleOK=!mod||(card?card.dataset.module===mod:r.innerText.includes(mod)),nameHit=!!(card&&term&&card.dataset.table.toLowerCase().includes(term));const match=moduleOK&&(!term||nameHit||r.innerText.toLowerCase().includes(term));r.hidden=!match}});let shown=0;document.querySelectorAll('.table-card').forEach(card=>{const moduleOK=!mod||card.dataset.module===mod;const rows=[...card.querySelectorAll('tbody tr')],rowMatch=!term||card.dataset.table.toLowerCase().includes(term)||rows.some(r=>!r.hidden)||card.querySelector('ul')?.innerText.toLowerCase().includes(term);card.hidden=!(moduleOK&&rowMatch);if(term&&!card.hidden)card.open=true;if(!card.hidden)shown++});document.querySelectorAll('#content>h2,#content>p,#content>table,#content>.table-wrap,#content>ul').forEach(el=>{if(!term&&!mod){el.hidden=false;return}if(el.matches('h2')){el.hidden=false;return}if(el.matches('p,ul'))el.hidden=!!term&&!el.innerText.toLowerCase().includes(term);if(el.matches('table,.table-wrap'))el.hidden=!el.querySelector('tbody tr:not([hidden])')});document.querySelector('#empty').style.display=shown||(!term&&!mod)?'none':'block'}q.addEventListener('input',filter);m.addEventListener('change',filter);</script></body></html>

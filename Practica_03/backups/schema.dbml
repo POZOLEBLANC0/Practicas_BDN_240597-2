@@ -1,0 +1,407 @@
+Project db_test_7b {
+  database_type: "MySQL"
+  Note: "Extraído de db_test_7b1211.sql; 25 tablas y 34 FK"
+}
+
+Table tb_buyer_orders {
+  Note: 'Registros: 0'
+  ID int unsigned [pk, not null, increment]
+  seller_ID int [not null]
+  subtotal decimal(12,2) [not null, default: '0.00']
+  shipping_cost decimal(12,2) [not null, default: '0.00']
+  fulfillment_status enum('Pending','Accepted','Preparing','Sent','Delivered','Canceled','Returned') [not null, default: 'Pending']
+  status bit(1) [not null, default: `b'1'`]
+  creation_date datetime [not null, default: `CURRENT_TIMESTAMP`]
+  last_update datetime [default: null]
+}
+
+Table tb_carts {
+  Note: 'Registros: 0'
+  ID int unsigned [pk, not null, increment]
+  user_ID int [unique, not null]
+  status bit(1) [default: `b'1'`]
+  creation_date datetime [not null, default: `CURRENT_TIMESTAMP`]
+  last_update datetime [default: null]
+}
+
+Table tb_logs {
+  Note: 'Registros: 44,610'
+  ID int [pk, not null, increment]
+  table_name varchar(80) [not null]
+  table_operation enum('Create','Read','Update','Delete') [default: null]
+  db_user varchar(80) [not null]
+  operation_date datetime [not null, default: `CURRENT_TIMESTAMP`]
+  table_description text [not null]
+  operation_status bit(1) [default: `b'1'`]
+}
+
+Table tb_order_cancellations {
+  Note: 'Registros: 0'
+  ID int unsigned [pk, not null, increment]
+  order_ID int unsigned [not null]
+  reason text
+  status bit(1) [default: null]
+  creation_date datetime [default: null]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  created_by varchar(100) [default: null]
+  last_update timestamp [default: null]
+}
+
+Table tb_payment_methods {
+  Note: 'Registros: 0'
+  ID int unsigned [pk, not null, increment]
+  user_ID int [not null]
+  name varchar(50) [default: null]
+  description varchar(255) [default: null]
+  status bit(1) [default: null]
+  creation_date datetime [default: null]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  created_by varchar(100) [default: null]
+  last_update timestamp [default: null]
+}
+
+Table tb_payment_transaction {
+  Note: 'Registros: 0'
+  ID int unsigned [pk, not null, increment]
+  payment_ID int unsigned [not null]
+  transaction_ref varchar(255) [default: null]
+  amount decimal(12,2) [default: null]
+  status bit(1) [default: null]
+  creation_date datetime [default: null]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  created_by varchar(100) [default: null]
+  last_update timestamp [default: null]
+}
+
+Table tb_payments {
+  Note: 'Registros: 0'
+  ID int unsigned [pk, not null, increment]
+  order_ID int unsigned [not null]
+  user_payment_method_ID bigint unsigned [default: null]
+  amount decimal(12,2) [default: null]
+  status bit(1) [default: null]
+  creation_date datetime [default: null]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  created_by varchar(100) [default: null]
+  last_update timestamp [default: null]
+}
+
+Table tb_people {
+  Note: 'Registros: 7,502'
+  person_ID bigint unsigned [pk, not null, increment]
+  user_ID int [unique, default: null]
+  courtesy_title varchar(20) [default: null]
+  given_names varchar(150) [not null]
+  family_names varchar(150) [not null]
+  birth_date date [default: null]
+  gender enum('Hombre','Mujer','Prefiero no decirlo') [not null, default: 'Prefiero no decirlo']
+  country_code char(2) [default: null]
+  phone varchar(25) [default: null]
+  status bit(1) [default: `b'1'`]
+  creation_date datetime [default: `CURRENT_TIMESTAMP`]
+  last_update datetime [default: `CURRENT_TIMESTAMP`]
+}
+
+Table tb_products {
+  Note: 'Registros: 7,007'
+  ID int unsigned [pk, not null, increment]
+  SKU varchar(50) [unique, not null]
+  name varchar(250) [not null]
+  description text
+  current_price decimal(10,2) [not null, default: '0.00']
+  current_stock int unsigned [not null, default: '0']
+  status bit(1) [default: `b'1'`]
+  creation_date datetime [not null, default: `CURRENT_TIMESTAMP`]
+  last_update datetime [not null, default: `CURRENT_TIMESTAMP`]
+}
+
+Table tb_refunds {
+  Note: 'Registros: 0'
+  ID int unsigned [pk, not null, increment]
+  order_ID int unsigned [not null]
+  reason text
+  amount decimal(12,2) [default: null]
+  status bit(1) [default: null]
+  creation_date datetime [default: null]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  created_by varchar(100) [default: null]
+  last_update timestamp [default: null]
+}
+
+Table tb_returns {
+  Note: 'Registros: 0'
+  ID int unsigned [pk, not null, increment]
+  order_ID int unsigned [not null]
+  reason text
+  status bit(1) [default: null]
+  creation_date datetime [default: null]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  created_by varchar(100) [default: null]
+  last_update timestamp [default: null]
+}
+
+Table tb_shipments {
+  Note: 'Registros: 0'
+  ID int unsigned [pk, not null, increment]
+  order_ID int unsigned [not null]
+  address_ID bigint unsigned [default: null]
+  carrier varchar(50) [default: null]
+  tracking_number varchar(100) [default: null]
+  status bit(1) [default: null]
+  creation_date datetime [default: null]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  created_by varchar(100) [default: null]
+  last_update timestamp [default: null]
+}
+
+Table tb_user_addresses {
+  Note: 'Registros: 0'
+  ID bigint unsigned [pk, not null, increment]
+  user_ID int [not null]
+  address_label varchar(100) [not null]
+  recipient_name varchar(150) [default: null]
+  recipient_phone varchar(25) [default: null]
+  delivery_instructions varchar(500) [default: null]
+  latitude decimal(10,7) [default: null]
+  longitude decimal(10,7) [default: null]
+  is_default tinyint(1) [not null, default: '0']
+  status bit(1) [not null, default: `b'1'`]
+  creation_date datetime [not null, default: `CURRENT_TIMESTAMP`]
+  last_update datetime [default: null]
+}
+
+Table tb_users {
+  Note: 'Registros: 7,510'
+  ID int [pk, not null, increment]
+  email varchar(100) [unique, not null]
+  nick varchar(50) [unique, not null]
+  password varchar(255) [not null]
+  creation_date datetime [not null, default: `CURRENT_TIMESTAMP`]
+  last_update datetime [default: null]
+  last_login datetime [default: null]
+  status bit(1) [default: `b'1'`]
+}
+
+Table tbc_categories {
+  Note: 'Registros: 100'
+  ID int unsigned [pk, not null, increment]
+  name varchar(120) [unique, not null]
+  description text
+  sup_id_category int unsigned [default: null]
+  status bit(1) [not null, default: `b'1'`]
+  creation_date datetime [not null, default: `CURRENT_TIMESTAMP`]
+  last_update datetime [not null, default: `CURRENT_TIMESTAMP`]
+}
+
+Table tbc_payment_methods_types {
+  Note: 'Registros: 0'
+  ID int unsigned [pk, not null, increment]
+  code varchar(30) [not null]
+  description text [not null]
+  status bit(1) [not null, default: `b'1'`]
+  creation_date datetime [not null, default: `CURRENT_TIMESTAMP`]
+  last_update datetime [default: `CURRENT_TIMESTAMP`]
+}
+
+Table tbd_address_components {
+  Note: 'Registros: 0'
+  ID bigint unsigned [pk, not null, increment]
+  address_ID bigint unsigned [not null]
+  value varchar(255) [not null]
+  component_type varchar(50) [not null]
+  status bit(1) [not null, default: `b'1'`]
+  address_sup_ID bigint unsigned [default: null]
+  creation_date datetime [not null, default: `CURRENT_TIMESTAMP`]
+  last_update datetime [default: null]
+  indexes {
+    (address_ID, ID) [unique, name: 'uk_address_component']
+  }
+}
+
+Table tbd_cancellation_items {
+  Note: 'Registros: 0'
+  cancellation_ID int unsigned [not null]
+  product_ID int unsigned [not null]
+  quantity int unsigned [default: null]
+  creation_date datetime [default: null]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  created_by varchar(100) [default: null]
+  last_update timestamp [default: null]
+  indexes {
+    (cancellation_ID, product_ID) [pk]
+  }
+}
+
+Table tbd_carts_items {
+  Note: 'Registros: 0'
+  cart_ID int unsigned [not null]
+  provider_ID int [not null]
+  product_ID int unsigned [not null]
+  quantity int unsigned [not null, default: '1']
+  creation_date datetime [not null, default: `CURRENT_TIMESTAMP`]
+  indexes {
+    (cart_ID, provider_ID, product_ID) [pk]
+  }
+}
+
+Table tbd_order_items {
+  Note: 'Registros: 0'
+  ID int unsigned [pk, not null, increment]
+  seller_order_ID int unsigned [not null]
+  product_ID int unsigned [not null]
+  provider_ID int [not null]
+  product_name varchar(255) [not null]
+  quantity int unsigned [not null]
+  unit_price decimal(12,2) [not null]
+  subtotal decimal(12,2)
+  creation_date datetime [not null, default: `CURRENT_TIMESTAMP`]
+}
+
+Table tbd_products_categorias {
+  Note: 'Registros: 15,348'
+  product_ID int unsigned [not null]
+  category_ID int unsigned [not null]
+  status bit(1) [not null, default: `b'1'`]
+  creation_date datetime [not null, default: `CURRENT_TIMESTAMP`]
+  last_update datetime [not null, default: `CURRENT_TIMESTAMP`]
+  indexes {
+    (product_ID, category_ID) [pk]
+  }
+}
+
+Table tbd_products_users_providers {
+  Note: 'Registros: 7,007'
+  user_ID int [not null]
+  product_ID int unsigned [not null]
+  type_ownership enum('Owner','Reseller','Distributor') [default: null]
+  status bit(1) [not null, default: `b'1'`]
+  avalaible_date datetime [not null]
+  creation_date datetime [not null, default: `CURRENT_TIMESTAMP`]
+  last_update datetime [not null, default: `CURRENT_TIMESTAMP`]
+  indexes {
+    (user_ID, product_ID) [pk]
+  }
+}
+
+Table tbd_return_items {
+  Note: 'Registros: 0'
+  return_ID int unsigned [not null]
+  product_ID int unsigned [not null]
+  quantity int unsigned [default: null]
+  creation_date datetime [default: null]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  created_by varchar(100) [default: null]
+  last_update timestamp [default: null]
+  indexes {
+    (return_ID, product_ID) [pk]
+  }
+}
+
+Table tbd_user_payment_methods {
+  Note: 'Registros: 0'
+  ID bigint unsigned [pk, not null, increment]
+  user_ID int [not null]
+  payment_method_type_ID int unsigned [not null]
+  provider varchar(60) [not null]
+  provider_method_ref varchar(255) [not null]
+  label varchar(100) [default: null]
+  last_four char(4) [default: null]
+  is_default tinyint(1) [not null, default: '0']
+  status bit(1) [not null, default: `b'1'`]
+  creation_date datetime [not null, default: `CURRENT_TIMESTAMP`]
+  last_update datetime [default: null]
+  indexes {
+    (provider, provider_method_ref) [unique, name: 'uk_provider_method']
+  }
+}
+
+Table tbd_users_wishlist_products {
+  Note: 'Registros: 0'
+  user_ID int [not null]
+  product_ID int unsigned [not null]
+  status bit(1) [not null, default: `b'1'`]
+  creation_date datetime [not null, default: `CURRENT_TIMESTAMP`]
+  last_update datetime [not null, default: `CURRENT_TIMESTAMP`]
+  indexes {
+    (user_ID, product_ID) [pk]
+  }
+}
+Ref tb_buyer_orders_ibfk_1: tb_buyer_orders.seller_ID > tb_users.ID
+Ref tb_carts_ibfk_1: tb_carts.user_ID - tb_users.ID
+Ref fk_order_cancellations_order: tb_order_cancellations.order_ID > tb_buyer_orders.ID [delete: restrict, update: cascade]
+Ref fk_payment_methods_user: tb_payment_methods.user_ID > tb_users.ID [delete: restrict, update: cascade]
+Ref fk_payment_transaction_payment: tb_payment_transaction.payment_ID > tb_payments.ID [delete: restrict, update: cascade]
+Ref fk_payments_order: tb_payments.order_ID > tb_buyer_orders.ID [delete: restrict, update: cascade]
+Ref fk_payments_user_payment_method: tb_payments.user_payment_method_ID >? tbd_user_payment_methods.ID [delete: restrict, update: cascade]
+Ref fk_people_users: tb_people.user_ID -? tb_users.ID
+Ref fk_refunds_order: tb_refunds.order_ID > tb_buyer_orders.ID [delete: restrict, update: cascade]
+Ref fk_returns_order: tb_returns.order_ID > tb_buyer_orders.ID [delete: restrict, update: cascade]
+Ref fk_shipments_address: tb_shipments.address_ID >? tb_user_addresses.ID [delete: restrict, update: cascade]
+Ref fk_shipments_order: tb_shipments.order_ID > tb_buyer_orders.ID [delete: restrict, update: cascade]
+Ref fk_addresses_users: tb_user_addresses.user_ID > tb_users.ID
+Ref fk_superior_category: tbc_categories.sup_id_category >? tbc_categories.ID
+Ref fk_component_address: tbd_address_components.address_ID > tb_user_addresses.ID [delete: restrict]
+Ref fk_component_parent: tbd_address_components.(address_ID, address_sup_ID) > tbd_address_components.(address_ID, ID) [delete: restrict]
+Ref fk_cancellation_items_cancellation: tbd_cancellation_items.cancellation_ID > tb_order_cancellations.ID [delete: cascade, update: cascade]
+Ref fk_cancellation_items_product: tbd_cancellation_items.product_ID > tb_products.ID [delete: restrict, update: cascade]
+Ref tbd_carts_items_ibfk_1: tbd_carts_items.cart_ID > tb_carts.ID
+Ref tbd_carts_items_ibfk_2: tbd_carts_items.provider_ID > tbd_products_users_providers.user_ID
+Ref tbd_carts_items_ibfk_3: tbd_carts_items.product_ID > tbd_products_users_providers.product_ID
+Ref tbd_order_items_ibfk_1: tbd_order_items.seller_order_ID > tb_buyer_orders.ID
+Ref tbd_order_items_ibfk_2: tbd_order_items.product_ID > tbd_products_users_providers.product_ID
+Ref tbd_order_items_ibfk_3: tbd_order_items.provider_ID > tbd_products_users_providers.user_ID
+Ref fk_category1: tbd_products_categorias.category_ID > tbc_categories.ID
+Ref fk_product1: tbd_products_categorias.product_ID > tb_products.ID
+Ref fk_products2: tbd_products_users_providers.product_ID > tb_products.ID
+Ref fk_user1: tbd_products_users_providers.user_ID > tb_users.ID
+Ref fk_return_items_product: tbd_return_items.product_ID > tb_products.ID [delete: restrict, update: cascade]
+Ref fk_return_items_return: tbd_return_items.return_ID > tb_returns.ID [delete: cascade, update: cascade]
+Ref fk_user_payment_type: tbd_user_payment_methods.payment_method_type_ID > tbc_payment_methods_types.ID
+Ref fk_user_payment_user: tbd_user_payment_methods.user_ID > tb_users.ID
+Ref fk_products3: tbd_users_wishlist_products.product_ID > tb_products.ID
+Ref fk_user2: tbd_users_wishlist_products.user_ID > tb_users.ID
+
+TableGroup "Usuarios y Seguridad" [color: #DDEBFF] {
+  Note: '6 tablas; registros: 15,012'
+  tb_users
+  tb_people
+  tb_user_addresses
+  tbd_address_components
+  tbd_user_payment_methods
+  tbd_users_wishlist_products
+}
+
+TableGroup "Catálogo y Productos" [color: #E3F5E8] {
+  Note: '5 tablas; registros: 29,462'
+  tb_products
+  tbc_categories
+  tbd_products_categorias
+  tbd_products_users_providers
+  tbc_payment_methods_types
+}
+
+TableGroup "Órdenes y Pagos" [color: #FFF0D6] {
+  Note: '7 tablas; registros: 0'
+  tb_buyer_orders
+  tb_carts
+  tb_payment_methods
+  tb_payment_transaction
+  tb_payments
+  tbd_carts_items
+  tbd_order_items
+}
+
+TableGroup "Envíos, Devoluciones y Cancelaciones" [color: #F6E1ED] {
+  Note: '6 tablas; registros: 0'
+  tb_shipments
+  tb_returns
+  tb_refunds
+  tb_order_cancellations
+  tbd_return_items
+  tbd_cancellation_items
+}
+
+TableGroup "Auditoría y Bitácora" [color: #E9E1FF] {
+  Note: '1 tabla; registros: 44,610'
+  tb_logs
+}
